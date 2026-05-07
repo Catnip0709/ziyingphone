@@ -749,6 +749,7 @@ body {
 .deepseek-question,
 .deepseek-answer {
   display: flex;
+  flex-direction: column;
 }
 
 .deepseek-answer {
@@ -758,6 +759,26 @@ body {
 
 .deepseek-question {
   justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.deepseek-answer {
+  align-items: flex-start;
+}
+
+.deepseek-time {
+  margin: 0 6px 6px;
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(232, 237, 255, 0.38);
+}
+
+.deepseek-time.user {
+  text-align: right;
+}
+
+.deepseek-time.ai {
+  text-align: left;
 }
 
 .deepseek-bubble {
@@ -871,6 +892,390 @@ body {
 .deepseek-composer-action:active,
 .deepseek-send-btn:active {
   opacity: 0.76;
+}
+
+/* ========================================
+   Messages App - 短信应用
+   ======================================== */
+.messages-app {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #F3F4F8;
+  overflow: hidden;
+}
+
+.messages-header {
+  padding: 18px 18px 12px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8F9FC 100%);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+
+.messages-header h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  color: #111;
+  font-weight: 700;
+}
+
+.messages-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #8A8A8E;
+}
+
+.messages-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 12px calc(18px + env(safe-area-inset-bottom, 0px));
+}
+
+.messages-list::-webkit-scrollbar {
+  display: none;
+}
+
+.messages-item + .messages-item {
+  margin-top: 10px;
+}
+
+.messages-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #FFF;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+.messages-item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.messages-item-icon.spam {
+  background: linear-gradient(160deg, #FFA63D, #FF7A00);
+}
+
+.messages-item-icon.code {
+  background: linear-gradient(160deg, #56CCF2, #2F80ED);
+}
+
+.messages-item-icon.trade {
+  background: linear-gradient(160deg, #7E57FF, #5B43D6);
+}
+
+.messages-item-icon.bank {
+  background: linear-gradient(160deg, #34C759, #18A94B);
+}
+
+.messages-item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.messages-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.messages-item-sender-row {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.messages-item-sender {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.messages-item-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.messages-item-badge.spam {
+  background: rgba(255,122,0,0.12);
+  color: #FF7A00;
+}
+
+.messages-item-badge.code {
+  background: rgba(47,128,237,0.12);
+  color: #2F80ED;
+}
+
+.messages-item-badge.trade {
+  background: rgba(126,87,255,0.12);
+  color: #6A4DFF;
+}
+
+.messages-item-badge.bank {
+  background: rgba(52,199,89,0.14);
+  color: #18A94B;
+}
+
+.messages-item-time {
+  font-size: 12px;
+  color: #A0A2A8;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.messages-item-body {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #3D3E43;
+}
+
+.messages-item-meta-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.messages-item-meta {
+  font-size: 12px;
+  color: #8A8A8E;
+  flex: 1;
+  min-width: 0;
+}
+
+.messages-item-amount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #18A94B;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.messages-empty {
+  margin-top: 8px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #FFF;
+  font-size: 14px;
+  color: #8A8A8E;
+  text-align: center;
+}
+
+/* ========================================
+   Photos App - 相册应用
+   ======================================== */
+.photos-app {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #F5F6F8;
+  overflow: hidden;
+}
+
+.photos-header {
+  padding: 18px 18px 12px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 100%);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+
+.photos-header h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111;
+}
+
+.photos-subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #8A8A8E;
+}
+
+.photos-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: start;
+}
+
+.photos-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.photos-card {
+  border: none;
+  background: #FFF;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.photos-card:active {
+  transform: scale(0.985);
+}
+
+.photos-thumb-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #E5E7EE;
+  overflow: hidden;
+}
+
+.photos-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photos-card-info {
+  padding: 12px 12px 13px;
+}
+
+.photos-card-title {
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.photos-card-meta {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #8A8A8E;
+}
+
+.photos-empty {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  border-radius: 20px;
+  padding: 24px 18px;
+  background: #FFF;
+  text-align: center;
+}
+
+.photos-empty-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+}
+
+.photos-empty-text {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #8A8A8E;
+}
+
+.photos-viewer-host:empty {
+  display: none;
+}
+
+.photos-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.94);
+  display: flex;
+  flex-direction: column;
+}
+
+.photos-viewer-close {
+  align-self: flex-end;
+  margin: 12px 14px 0 0;
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 17px;
+  background: rgba(255,255,255,0.12);
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.photos-viewer-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+  padding: 12px;
+}
+
+.photos-viewer-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.photos-viewer-info {
+  padding: 0 18px calc(18px + env(safe-area-inset-bottom, 0px));
+  color: #FFF;
+}
+
+.photos-viewer-title {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.photos-viewer-meta {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.7);
 }
 
 /* ========================================

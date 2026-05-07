@@ -1,0 +1,162 @@
+# ============================================
+# 短信收件箱文案
+# 格式说明：
+#   [message] 开始一条短信
+#   sender=发送方
+#   time=时间
+#   type=spam|code|trade|bank
+#   badge=分类标记
+#   body=正文，支持 \n 换行
+#   meta=补充说明
+#   amount=金额，可选
+# ============================================
+
+[message]
+sender=琼华灵讯
+time=今天 02:14
+type=spam
+badge=垃圾短信
+body=尊贵的剑修道友，您已获选“九天玄兵试炼体验名额”，现在回复“御剑”即可免费领取天外寒铁一斤、聚灵符三张。
+meta=退订回T
+
+[message]
+sender=琼华派验真
+time=今天 00:43
+type=code
+badge=验证码
+body=【琼华派验真】您本次登录门派藏书阁的验证码为 483219，请在5分钟内使用。若非本人操作，请忽略。
+
+[message]
+sender=承天剑台铸坊
+time=昨天 23:18
+type=trade
+badge=交易记录
+body=您托付重淬的佩剑已完成第一轮淬火，现确认加刻“镇煞纹”一层，另补收寒铁粉与乌金液工费。
+meta=订单编号 ZJ-0427-19
+amount=¥268.00
+
+[message]
+sender=寿阳矿行老杜
+time=昨天 21:56
+type=trade
+badge=矿石交易
+body=紫英道长，您要的三块赤铜母矿今晨已入库，另有一块品相极好的寒髓石，可一并给您留到明日午时。
+meta=回“留”可继续保留
+
+[message]
+sender=昆仑祥云贷
+time=昨天 20:11
+type=spam
+badge=垃圾短信
+body=还在为丹药、铸剑、布阵周转烦恼吗？祥云贷为您提供最高五千灵石极速到账服务，日息低至万分之一！
+meta=拒收请回复N
+
+[message]
+sender=太一钱庄
+time=昨天 18:07
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=寿阳县东市·福来食肆
+amount=¥86.00
+
+[message]
+sender=太一钱庄
+time=昨天 18:03
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=寿阳县西街·云锦衣铺
+amount=¥243.00
+
+[message]
+sender=陈州珠宝行
+time=昨天 17:42
+type=trade
+badge=交易记录
+body=您预订的流苏银坠与细金扣已备妥，可于三日内至柜台取货。若需再配一对小珠串，可直接回信加单。
+meta=掌柜备注：尺寸已按“姑娘常戴的那种”预留
+amount=¥168.00
+
+[message]
+sender=太一钱庄
+time=昨天 17:41
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=陈州南街·琳琅首饰铺
+amount=¥168.00
+
+[message]
+sender=山下二手法器群发
+time=昨天 16:20
+type=spam
+badge=垃圾短信
+body=高价回收旧剑、残符、裂损玉佩、报废法器！破损越重报价越高，当面验货，绝不压价。
+meta=回TD退订
+
+[message]
+sender=琼华派验真
+time=昨天 03:12
+type=code
+badge=验证码
+body=【琼华派验真】您本次调阅禁地旧卷的验证码为 917602，请勿向他人泄露。
+
+[message]
+sender=寒铁铺老许
+time=前天 22:48
+type=trade
+badge=矿石交易
+body=那批黑曜铁砂我给你过筛过了，细料能直接拿去压剑脊，粗料留着补炉火正好。你若明早下山，我顺手再给你带两斤。
+meta=老许：别再空着手来，至少带壶酒
+
+[message]
+sender=太一钱庄
+time=前天 21:07
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=寿阳县北巷·热汤小铺
+amount=¥32.00
+
+[message]
+sender=太一钱庄
+time=前天 21:05
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=寿阳县北巷·蜜饯摊
+amount=¥18.00
+
+[message]
+sender=太一钱庄
+time=前天 20:58
+type=bank
+badge=银行卡流水
+body=您尾号 2719 的储蓄账户支出一笔银钱。
+meta=寿阳县东市·绣坊成衣
+amount=¥326.00
+
+[message]
+sender=琼华派膳堂
+time=前天 19:34
+type=code
+badge=取餐码
+body=【琼华派膳堂】您代取的晚膳已备妥，取餐号甲七十四。酥酪、热粥、桂花糕请尽快领取，以免放凉。
+
+[message]
+sender=灵石急转铺
+time=前天 16:08
+type=spam
+badge=垃圾短信
+body=道友您好，名下闲置灵石可兑换现银、药材、矿石或稀有图谱，支持上门点验，信誉有保。
+meta=退订回T
+
+[message]
+sender=明尘铸坊
+time=三天前 11:26
+type=trade
+badge=帮人铸剑
+body=先前托你代看的那柄女式短刃，我已按你说的改轻三分、收窄剑格。若她手腕旧伤未愈，这一版应更合用。
+meta=附言：剑穗位置也给你留好了
+amount=¥520.00

@@ -27,6 +27,8 @@
     function pushQa() {
       if (!currentQa) return;
       qaList.push({
+        qTime: currentQa.qTime || currentQa.time || "",
+        aTime: currentQa.aTime || currentQa.time || "",
         q: currentQa.q || "",
         a: currentQa.a || ""
       });
@@ -98,9 +100,15 @@
       qaList.forEach(function (item) {
         html += '<div class="deepseek-thread">';
         html += '<div class="deepseek-question">';
+        if (item.qTime) {
+          html += '<div class="deepseek-time user">' + escapeHtml(item.qTime) + '</div>';
+        }
         html += '<div class="deepseek-bubble user">' + formatText(item.q) + '</div>';
         html += '</div>';
         html += '<div class="deepseek-answer">';
+        if (item.aTime) {
+          html += '<div class="deepseek-time ai">' + escapeHtml(item.aTime) + '</div>';
+        }
         html += '<div class="deepseek-bubble ai">' + formatText(item.a) + '</div>';
         html += '</div>';
         html += '</div>';
