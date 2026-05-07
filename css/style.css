@@ -1010,6 +1010,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 3px;
   height: 20px;
   padding: 0 7px;
   border-radius: 999px;
@@ -1018,6 +1019,31 @@ body {
   font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
+}
+
+.weibo-hot-tag-icon {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.weibo-hot-tag.tag-boom {
+  background: rgba(255,59,48,0.12);
+  color: #FF3B30;
+}
+
+.weibo-hot-tag.tag-hot {
+  background: rgba(255,106,0,0.12);
+  color: #FF6A00;
+}
+
+.weibo-hot-tag.tag-notice {
+  background: rgba(47,128,237,0.12);
+  color: #2F80ED;
+}
+
+.weibo-hot-tag.tag-new {
+  background: rgba(52,199,89,0.14);
+  color: #34C759;
 }
 
 .weibo-hot-heat {

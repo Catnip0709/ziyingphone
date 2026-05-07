@@ -104,13 +104,25 @@
   }
 
   function renderHotTopic(topic) {
+    var tagClass = "";
+    var tagIcon = "";
+    if (topic.tag === "爆") {
+      tagClass = "tag-boom";
+      tagIcon = '<span class="weibo-hot-tag-icon">🔥</span>';
+    } else if (topic.tag === "热") {
+      tagClass = "tag-hot";
+    } else if (topic.tag === "公告") {
+      tagClass = "tag-notice";
+    } else if (topic.tag === "新") {
+      tagClass = "tag-new";
+    }
     var html = '<div class="weibo-hot-item">';
     html += '<div class="weibo-hot-rank">' + escapeHtml(String(topic.rank || "")) + "</div>";
     html += '<div class="weibo-hot-main">';
     html += '<div class="weibo-hot-title-row">';
     html += '<div class="weibo-hot-title">' + escapeHtml(topic.title) + "</div>";
     if (topic.tag) {
-      html += '<span class="weibo-hot-tag">' + escapeHtml(topic.tag) + "</span>";
+      html += '<span class="weibo-hot-tag ' + tagClass + '">' + tagIcon + '<span>' + escapeHtml(topic.tag) + "</span></span>";
     }
     html += "</div>";
     html += '<div class="weibo-hot-heat">' + escapeHtml(topic.heat || "") + "</div>";
