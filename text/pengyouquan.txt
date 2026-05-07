@@ -1,0 +1,83 @@
+# ============================================
+# 微信朋友圈文案
+# 格式说明：
+#   [cover]        朋友圈封面用户信息
+#   [post]         一条朋友圈开始
+#   通用字段使用 key=value
+#
+# 封面字段：
+#   name=昵称
+#   avatarName=头像字
+#   avatarColor=头像颜色
+#
+# 帖子字段：
+#   name=发帖人昵称
+#   avatarName=头像字
+#   avatarColor=头像颜色
+#   time=发布时间
+#   text=正文，支持用 \n 表示换行
+#   images=配图数量
+#   video=视频时长，例如 0:12
+#   remind=提醒文案
+#   blocked=屏蔽提示
+#   likes=点赞人1,点赞人2,点赞人3
+#   comment=评论人|回复对象|评论内容
+#   comment=评论人||评论内容
+# ============================================
+
+[cover]
+name=慕容紫英
+avatarName=英
+avatarColor=#5B8DB8
+
+[post]
+name=菱纱
+avatarName=纱
+avatarColor=#FF6B9D
+time=2小时前
+text=终于把某位剑痴从剑舞坪里拽下山了。\n今日陈州天气不错，勉强允许他陪我逛一会儿。
+images=3
+likes=天河,梦璃,夙莘师叔
+comment=天河||紫英居然真的会陪人逛街！
+comment=梦璃||今日看起来很热闹。
+comment=菱纱|梦璃|下次你也一起来呀。
+
+[post]
+name=慕容紫英
+avatarName=英
+avatarColor=#5B8DB8
+time=1小时前
+text=山下新开的花圃，确实比往年繁盛一些。
+images=1
+likes=菱纱,梦璃
+comment=菱纱||你终于承认是我眼光好了吧。
+
+[post]
+name=天河
+avatarName=河
+avatarColor=#4A90D9
+time=47分钟前
+text=新练的剑势差一点就成了！下次一定让紫英夸我！
+video=0:14
+likes=菱纱,夙莘师叔
+comment=夙莘师叔||先别把后山劈开再说。
+comment=紫英|夙莘师叔|他今日已经收敛许多。
+
+[post]
+name=梦璃
+avatarName=璃
+avatarColor=#9B7ED8
+time=22分钟前
+text=今日风色轻柔，山间草木也显得格外安静。
+remind=提到了 慕容紫英、韩菱纱
+likes=慕容紫英,韩菱纱
+comment=菱纱||梦璃这句写得也太好看了。
+
+[post]
+name=夙莘师叔
+avatarName=莘
+avatarColor=#E67E22
+time=刚刚
+text=偷偷下山买了三包点心，某位晚归的小紫英应该会喜欢。
+blocked=仅自己可见
+images=2

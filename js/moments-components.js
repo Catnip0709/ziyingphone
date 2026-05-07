@@ -6,10 +6,26 @@
 var MomentsComponents = (function() {
   "use strict";
 
+  var DEFAULT_MOMENTS_TXT_PATH = "text/pengyouquan.txt";
+  var DEFAULT_USER_INFO = {
+    name: "慕容紫英",
+    avatarName: "英",
+    avatarColor: "#5B8DB8"
+  };
+  var DEFAULT_MOMENTS_CONFIG = {
+    txtPath: DEFAULT_MOMENTS_TXT_PATH,
+    targetId: null,
+    targetElement: null
+  };
+
   function escapeHtml(text) {
     var div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+  }
+
+  function formatText(text) {
+    return escapeHtml(text || '').replace(/\n/g, '<br>');
   }
 
   var imgColors = [
@@ -33,7 +49,7 @@ var MomentsComponents = (function() {
     else if (count === 6) colsClass = 'cols-6';
 
     var html = '<div class="moments-images ' + colsClass + '">';
-    images.forEach(function(img, i) {
+    images.forEach(function(_, i) {
       var bg = imgColors[i % imgColors.length];
       html += '<div class="moments-img-item" style="background:' + bg + '"></div>';
     });
@@ -117,13 +133,13 @@ var MomentsComponents = (function() {
     html += '<span class="moments-post-time">' + escapeHtml(post.time) + '</span>';
     html += '</div>';
     if (post.text) {
-      html += '<div class="moments-post-text">' + escapeHtml(post.text) + '</div>';
+      html += '<div class="moments-post-text">' + formatText(post.text) + '</div>';
     }
     if (post.remind) {
-      html += '<div class="moments-post-remind">' + escapeHtml(post.remind) + '</div>';
+      html += '<div class="moments-post-remind">' + formatText(post.remind) + '</div>';
     }
     if (post.blocked) {
-      html += '<div class="moments-post-blocked">' + escapeHtml(post.blocked) + '</div>';
+      html += '<div class="moments-post-blocked">' + formatText(post.blocked) + '</div>';
     }
     if (post.images && post.images.length > 0) {
       html += renderImages(post.images);
@@ -157,6 +173,207 @@ var MomentsComponents = (function() {
     return html;
   }
 
+  function parseMomentsText(text) {
+    var lines = text.split("\n");
+    var userInfo = {
+      name: DEFAULT_USER_INFO.name,
+      avatarName: DEFAULT_USER_INFO.avatarName,
+      avatarColor: DEFAULT_USER_INFO.avatarColor
+    };
+    var posts = [];
+    var currentSection = "";
+    var currentPost = null;
+
+    function pushCurrentPost() {
+      if (!currentPost) return;
+      currentPost.name = currentPost.name || "未知";
+      currentPost.avatarName = currentPost.avatarName || currentPost.name.charAt(0) || "?";
+      currentPost.avatarColor = currentPost.avatarColor || "#5B8DB8";
+      currentPost.time = currentPost.time || "刚刚";
+      currentPost.likes = currentPost.likes || [];
+      currentPost.comments = currentPost.comments || [];
+      currentPost.images = currentPost.images || [];
+      posts.push(currentPost);
+      currentPost = null;
+    }
+
+    lines.forEach(function(rawLine) {
+      var line = rawLine.trim();
+      var keyValueMatch;
+
+      if (!line || line.startsWith("#")) {
+        return;
+      }
+
+      if (line === "[cover]") {
+        pushCurrentPost();
+        currentSection = "cover";
+        return;
+      }
+
+      if (line === "[post]") {
+        pushCurrentPost();
+        currentSection = "post";
+        currentPost = {
+          likes: [],
+          comments: [],
+          images: []
+        };
+        return;
+      }
+
+      keyValueMatch = line.match(/^([^=]+)=(.*)$/);
+      if (!keyValueMatch) {
+        return;
+      }
+
+      assignField(
+        currentSection,
+        keyValueMatch[1].trim(),
+        decodeValue(keyValueMatch[2].trim()),
+        userInfo,
+        currentPost
+      );
+    });
+
+    pushCurrentPost();
+
+    return {
+      userInfo: userInfo,
+      posts: posts
+    };
+  }
+
+  function decodeValue(value) {
+    return (value || "").replace(/\\n/g, "\n");
+  }
+
+  function assignField(section, key, value, userInfo, currentPost) {
+    if (section === "cover") {
+      userInfo[key] = value;
+      return;
+    }
+
+    if (section !== "post" || !currentPost) {
+      return;
+    }
+
+    switch (key) {
+      case "images":
+        currentPost.images = createImagePlaceholders(parseInt(value, 10));
+        break;
+      case "likes":
+        currentPost.likes = splitCommaList(value);
+        break;
+      case "comment":
+        currentPost.comments.push(parseComment(value));
+        break;
+      case "video":
+        currentPost.video = value;
+        break;
+      default:
+        currentPost[key] = value;
+    }
+  }
+
+  function createImagePlaceholders(count) {
+    var total = isNaN(count) ? 0 : Math.max(0, count);
+    var images = [];
+    var i;
+    for (i = 0; i < total; i++) {
+      images.push({ index: i });
+    }
+    return images;
+  }
+
+  function splitCommaList(value) {
+    if (!value) return [];
+    return value.split(",").map(function(item) {
+      return item.trim();
+    }).filter(Boolean);
+  }
+
+  function parseComment(value) {
+    var parts = value.split("|");
+    return {
+      author: (parts[0] || "").trim(),
+      replyTo: (parts[1] || "").trim(),
+      text: parts.slice(2).join("|").trim()
+    };
+  }
+
+  function loadMomentsText(txtPath, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", txtPath || DEFAULT_MOMENTS_TXT_PATH, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200 || xhr.status === 0) {
+          callback(parseMomentsText(xhr.responseText));
+        } else {
+          console.error("[MomentsComponents] 加载朋友圈文案失败:", xhr.status, txtPath);
+          callback({
+            userInfo: DEFAULT_USER_INFO,
+            posts: []
+          });
+        }
+      }
+    };
+    xhr.send();
+  }
+
+  function renderMomentsFromData(data) {
+    var userInfo = data && data.userInfo ? data.userInfo : DEFAULT_USER_INFO;
+    var posts = data && data.posts ? data.posts : [];
+    return renderMomentsPage(userInfo, posts);
+  }
+
+  function loadMomentsPage(callback, txtPath) {
+    loadMomentsText(txtPath || DEFAULT_MOMENTS_TXT_PATH, function(data) {
+      callback(renderMomentsFromData(data), data);
+    });
+  }
+
+  function normalizeLoaderOptions(options) {
+    var config = options || {};
+    return {
+      txtPath: config.txtPath || DEFAULT_MOMENTS_CONFIG.txtPath,
+      targetId: config.targetId || DEFAULT_MOMENTS_CONFIG.targetId,
+      targetElement: config.targetElement || DEFAULT_MOMENTS_CONFIG.targetElement,
+      onLoaded: typeof config.onLoaded === "function" ? config.onLoaded : null
+    };
+  }
+
+  function openMomentsText(options) {
+    var config = normalizeLoaderOptions(options);
+    loadMomentsText(config.txtPath, function(data) {
+      var html = renderMomentsFromData(data);
+      var target = config.targetElement ||
+        (config.targetId ? document.getElementById(config.targetId) : null);
+
+      if (target) {
+        target.innerHTML = html;
+      }
+
+      if (config.onLoaded) {
+        config.onLoaded(html, data, config);
+      }
+    });
+  }
+
+  var loaderApi = {
+    defaults: {
+      moments: DEFAULT_MOMENTS_CONFIG
+    },
+    open: openMomentsText,
+    parse: parseMomentsText,
+    load: loadMomentsText,
+    render: renderMomentsFromData
+  };
+
+  if (typeof window !== "undefined") {
+    window.MomentsTextLoader = loaderApi;
+  }
+
   return {
     renderImages: renderImages,
     renderVideo: renderVideo,
@@ -167,6 +384,10 @@ var MomentsComponents = (function() {
     renderActionsButton: renderActionsButton,
     renderPost: renderPost,
     renderCover: renderCover,
-    renderMomentsPage: renderMomentsPage
+    renderMomentsPage: renderMomentsPage,
+    parseMomentsText: parseMomentsText,
+    loadMomentsText: loadMomentsText,
+    loadMomentsPage: loadMomentsPage,
+    renderMomentsFromData: renderMomentsFromData
   };
 })();

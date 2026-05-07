@@ -256,22 +256,36 @@
     return inlineText || blockText || "";
   }
 
-  // ---------- 加载 TXT 文件 ----------
+  // ---------- 加载 TXT 文件 (带超时) ----------
   function loadChatText(txtPath, characters, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", txtPath, true);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200 || xhr.status === 0) {
-          var messages = parseChatText(xhr.responseText, characters);
-          callback(messages);
-        } else {
-          console.error("[ChatTextLoader] 加载文案失败:", xhr.status, txtPath);
-          callback([]);
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() {
+      controller.abort();
+      console.error("[ChatTextLoader] 加载超时:", txtPath);
+      callback([]);
+    }, 10000); // 10秒超时
+
+    fetch(txtPath, { signal: controller.signal })
+      .then(function(res) {
+        clearTimeout(timeoutId);
+        if (!res.ok) {
+          throw new Error('HTTP ' + res.status);
         }
-      }
-    };
-    xhr.send();
+        return res.text();
+      })
+      .then(function(text) {
+        var messages = parseChatText(text, characters);
+        callback(messages);
+      })
+      .catch(function(err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          console.error("[ChatTextLoader] 加载超时:", txtPath);
+        } else {
+          console.error("[ChatTextLoader] 加载文案失败:", err.message, txtPath);
+        }
+        callback([]);
+      });
   }
 
   // ---------- 渲染聊天页面 ----------
