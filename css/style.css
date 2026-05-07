@@ -1,0 +1,630 @@
+/* ============================================
+   捡手机文学 · 慕容紫英
+   iPhone 16 Pro Max 高保真模拟
+   ============================================ */
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* iPhone 16 Pro Max 物理尺寸 (pt) */
+  --w: 393px;
+  --h: 852px;
+  --r: 55px;           /* 圆角 */
+  --bezel: 3px;        /* 屏幕到边框距离 */
+
+  /* 灵动岛 */
+  --island-w: 126px;
+  --island-h: 37px;
+
+  /* 钛金属配色 */
+  --titanium-1: #2c2c2e;
+  --titanium-2: #3a3a3c;
+  --titanium-3: #48484a;
+  --titanium-highlight: rgba(255,255,255,0.04);
+  --titanium-shadow: rgba(0,0,0,0.6);
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "PingFang SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #000;
+}
+
+/* ========================================
+   Scene - 背景环境
+   ======================================== */
+.scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  height: 100dvh;
+  background: #111;
+  padding: 20px;
+}
+
+/* ========================================
+   Phone Frame - 钛金属外壳
+   ======================================== */
+.phone-frame {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  max-height: calc(100vh - 40px);
+  max-height: calc(100dvh - 40px);
+  background: var(--titanium-1);
+  border-radius: var(--r);
+  flex-shrink: 0;
+
+  /* 多层阴影模拟真实金属质感 */
+  box-shadow:
+    /* 最外层 - 环境光散射 */
+    0 0 0 1px rgba(80,80,80,0.3),
+    /* 外部投影 */
+    0 40px 100px -10px rgba(0,0,0,0.8),
+    0 10px 30px rgba(0,0,0,0.5),
+    /* 边框高光 - 模拟钛金属反光 */
+    inset 0 0.5px 0.5px rgba(255,255,255,0.08),
+    inset 0 -0.5px 0.5px rgba(0,0,0,0.3),
+    inset 0.5px 0 0.5px rgba(255,255,255,0.05),
+    inset -0.5px 0 0.5px rgba(0,0,0,0.2);
+}
+
+/* ---------- 侧键 ---------- */
+.side-btn {
+  position: absolute;
+  background: var(--titanium-2);
+  border-radius: 2px;
+  z-index: 10;
+}
+
+/* 静音键 - 左侧 */
+.side-btn-silent {
+  width: 3px;
+  height: 28px;
+  top: 140px;
+  left: -3px;
+  border-radius: 2px 0 0 2px;
+  box-shadow: inset -1px 0 1px rgba(0,0,0,0.3);
+}
+
+/* 音量+ - 左侧 */
+.side-btn-vol-up {
+  width: 3px;
+  height: 52px;
+  top: 190px;
+  left: -3px;
+  border-radius: 2px 0 0 2px;
+  box-shadow: inset -1px 0 1px rgba(0,0,0,0.3);
+}
+
+/* 音量- - 左侧 */
+.side-btn-vol-down {
+  width: 3px;
+  height: 52px;
+  top: 250px;
+  left: -3px;
+  border-radius: 2px 0 0 2px;
+  box-shadow: inset -1px 0 1px rgba(0,0,0,0.3);
+}
+
+/* 电源键 - 右侧 */
+.side-btn-power {
+  width: 3px;
+  height: 80px;
+  top: 200px;
+  right: -3px;
+  border-radius: 0 2px 2px 0;
+  box-shadow: inset 1px 0 1px rgba(0,0,0,0.3);
+}
+
+/* ========================================
+   Screen - 屏幕区域
+   ======================================== */
+.phone-screen {
+  position: absolute;
+  top: var(--bezel);
+  left: var(--bezel);
+  right: var(--bezel);
+  bottom: var(--bezel);
+  border-radius: calc(var(--r) - var(--bezel));
+  background: #000;
+  overflow: hidden;
+}
+
+/* ========================================
+   Dynamic Island - 灵动岛
+   ======================================== */
+.dynamic-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--island-w);
+  height: var(--island-h);
+  background: #000;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+.island-camera {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #1c3a5a, #0a1520);
+  box-shadow:
+    inset 0 0 2px rgba(100,150,200,0.15),
+    0 0 0 1px rgba(30,30,30,0.8);
+}
+
+/* ========================================
+   Status Bar - 状态栏
+   ======================================== */
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 28px 6px;
+  z-index: 90;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.status-bar-left {
+  min-width: 54px;
+}
+
+.status-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sb-icon {
+  color: #fff;
+}
+
+/* 电池 */
+.sb-battery {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.sb-battery-body {
+  width: 25px;
+  height: 12px;
+  border: 1.2px solid rgba(255,255,255,0.9);
+  border-radius: 3px;
+  padding: 1.5px;
+  position: relative;
+}
+
+.sb-battery-fill {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 1px;
+}
+
+.sb-battery-cap {
+  width: 2px;
+  height: 5px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 0 1px 1px 0;
+  opacity: 0.5;
+}
+
+/* ========================================
+   Pages Wrapper
+   ======================================== */
+.pages-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+/* ========================================
+   Page - 通用页面
+   ======================================== */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform, opacity;
+}
+
+.page.active {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page.hidden-right {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page.hidden-left {
+  transform: translateX(-25%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ========================================
+   Home Page - 桌面
+   ======================================== */
+.page-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* 自定义桌面壁纸 */
+  background: url('../picture/desktop.jpg') center/cover no-repeat;
+}
+
+/* ========================================
+   App Icons - 应用图标
+   ======================================== */
+.home-apps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px 0;
+  padding: 120px 22px 0;
+  justify-items: center;
+}
+
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease;
+}
+
+.app-icon:active {
+  transform: scale(0.85);
+}
+
+.app-icon-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 13.5px;
+  overflow: hidden;
+  /* iOS 图标阴影 */
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.25),
+    0 4px 12px rgba(0,0,0,0.15);
+}
+
+.app-icon-img svg {
+  display: block;
+}
+
+.app-icon-label {
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 0 8px rgba(0,0,0,0.3);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+/* ========================================
+   Dock - 底部栏
+   ======================================== */
+.dock {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 14px 24px 18px;
+  margin: 0 6px 6px;
+  background: rgba(100,100,120,0.18);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 26px;
+  border: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.dock .app-icon-label {
+  display: none;
+}
+
+/* ========================================
+   App Page - 应用详情页
+   ======================================== */
+.page-app {
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  padding: 54px 16px 10px;
+  background: rgba(30,30,30,0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.app-nav-back {
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s;
+}
+
+.app-nav-back:active {
+  opacity: 0.4;
+}
+
+.app-nav-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  margin-left: 6px;
+}
+
+.app-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   Home Indicator
+   ======================================== */
+.home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 200;
+}
+
+.home-indicator-bar {
+  width: 134px;
+  height: 5px;
+  background: rgba(255,255,255,0.55);
+  border-radius: 100px;
+}
+
+/* ========================================
+   Responsive - 响应式
+   ======================================== */
+@media (max-height: 900px) {
+  .scene { padding: 10px; }
+  .phone-frame {
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+}
+
+@media (max-height: 860px) {
+  .phone-frame {
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+    aspect-ratio: 393 / 852;
+  }
+  .home-apps {
+    padding-top: 95px;
+    gap: 18px 0;
+  }
+  .dock {
+    padding: 12px 28px 16px;
+  }
+}
+
+/* ========================================
+   Notes App - 备忘录应用
+   ======================================== */
+.notes-list {
+  padding: 0;
+}
+
+.notes-list-header {
+  padding: 20px 20px 12px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.1);
+}
+
+.notes-list-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.notes-search {
+  width: 100%;
+  height: 36px;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 0 12px 0 36px;
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+}
+
+.notes-search::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.notes-search-wrapper {
+  position: relative;
+}
+
+.notes-search-wrapper svg {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(255,255,255,0.35);
+}
+
+.notes-group-title {
+  padding: 12px 20px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.notes-item {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 20px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.notes-item:active {
+  background: rgba(255,255,255,0.05);
+}
+
+.notes-item-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.notes-item-preview {
+  font-size: 15px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notes-item-date {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+}
+
+/* 备忘录详情页 */
+.notes-detail {
+  padding: 0;
+}
+
+.notes-detail-header {
+  padding: 16px 20px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.1);
+}
+
+.notes-detail-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.notes-detail-meta {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+
+.notes-detail-content {
+  padding: 20px;
+  font-size: 17px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.75;
+}
+
+.notes-detail-content p {
+  margin-bottom: 16px;
+}
+
+.notes-detail-content .date-line {
+  font-weight: 600;
+  color: #FFD700;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.notes-detail-content .note-text {
+  color: rgba(255,255,255,0.75);
+  padding-left: 12px;
+  border-left: 2px solid rgba(255,215,0,0.3);
+}
+
+/* 手机尺寸直接全屏 */
+@media (max-width: 430px) {
+  .scene {
+    padding: 0;
+    background: #000;
+  }
+  .phone-frame {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .phone-screen {
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 0;
+  }
+  .side-btn { display: none; }
+  .dynamic-island { top: 10px; }
+  .dock { margin-bottom: 4px; }
+}

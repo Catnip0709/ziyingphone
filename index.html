@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>捡手机文学 · 慕容紫英</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="scene">
+    <div class="phone-frame">
+      <!-- 侧键 -->
+      <div class="side-btn side-btn-silent"></div>
+      <div class="side-btn side-btn-vol-up"></div>
+      <div class="side-btn side-btn-vol-down"></div>
+      <div class="side-btn side-btn-power"></div>
+
+      <!-- 屏幕 -->
+      <div class="phone-screen">
+        <!-- 灵动岛 -->
+        <div class="dynamic-island">
+          <div class="island-camera"></div>
+        </div>
+
+        <!-- 状态栏 -->
+        <div class="status-bar">
+          <div class="status-bar-left">
+            <span class="status-time" id="statusTime">9:41</span>
+          </div>
+          <div class="status-bar-right">
+            <svg class="sb-icon" viewBox="0 0 17 12" width="17" height="12">
+              <rect x="0" y="9" width="3" height="3" rx="0.6" fill="currentColor"/>
+              <rect x="4.5" y="6" width="3" height="6" rx="0.6" fill="currentColor"/>
+              <rect x="9" y="3" width="3" height="9" rx="0.6" fill="currentColor"/>
+              <rect x="13.5" y="0" width="3" height="12" rx="0.6" fill="currentColor"/>
+            </svg>
+            <svg class="sb-icon" viewBox="0 0 16 12" width="16" height="12">
+              <path fill="currentColor" d="M8 9.6a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4zM4.2 7.8a5 5 0 017.6 0l-1 1a3.6 3.6 0 00-5.6 0l-1-1zm-2.8-2.8a8.4 8.4 0 0113.2 0l-1 1a7 7 0 00-11.2 0l-1-1z"/>
+            </svg>
+            <div class="sb-battery">
+              <div class="sb-battery-body">
+                <div class="sb-battery-fill"></div>
+              </div>
+              <div class="sb-battery-cap"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 页面容器 -->
+        <div class="pages-wrapper">
+          <!-- 桌面 -->
+          <div class="page page-home active" id="pageHome">
+            <div class="home-apps">
+              <!-- 备忘录 - 真实iOS风格 -->
+              <div class="app-icon" data-app="notes">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <defs>
+                      <linearGradient id="notesBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#FFF176"/>
+                        <stop offset="100%" stop-color="#FDD835"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="60" height="60" rx="13" fill="url(#notesBg)"/>
+                    <!-- 纸张主体 - 更真实 -->
+                    <rect x="11.5" y="9.5" width="37" height="41" rx="2.5" fill="#FFFEF9"/>
+                    <!-- 折角 - 更精确 -->
+                    <path d="M35 9.5 L48.5 9.5 L48.5 23 Z" fill="#FFE082"/>
+                    <path d="M35 9.5 L35 23 L48.5 23 Z" fill="#FFD54F"/>
+                    <!-- 纸张线条 - 更细致 -->
+                    <line x1="15.5" y1="28" x2="44.5" y2="28" stroke="#E0D6A0" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="15.5" y1="34" x2="44.5" y2="34" stroke="#E0D6A0" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="15.5" y1="40" x2="36" y2="40" stroke="#E0D6A0" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">备忘录</span>
+              </div>
+
+              <!-- 微博 - 真实官方风格 -->
+              <div class="app-icon" data-app="weibo">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <defs>
+                      <linearGradient id="weiboBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#FFD54F"/>
+                        <stop offset="100%" stop-color="#FF8F00"/>
+                      </linearGradient>
+                      <clipPath id="weiboClip">
+                        <rect width="60" height="60" rx="13"/>
+                      </clipPath>
+                    </defs>
+                    <rect width="60" height="60" rx="13" fill="url(#weiboBg)"/>
+
+                    <g clip-path="url(#weiboClip)">
+                      <!-- 红色大眼睛主体 - 更圆润的卡通鱼眼 -->
+                      <path d="
+                        M 10 36
+                        C 8 28, 14 18, 24 16
+                        C 28 15, 32 17, 34 20
+                        C 36 18, 39 17, 42 19
+                        C 45 21, 46 25, 44 29
+                        C 48 30, 50 34, 51 38
+                        C 52 44, 48 49, 41 50
+                        C 33 51, 23 49, 16 45
+                        C 11 42, 9 39, 10 36
+                        Z
+                      " fill="#E6162D"/>
+
+                      <!-- 白色眼睛部分 - 更偏左上 -->
+                      <ellipse cx="25" cy="33" rx="12" ry="9.5" fill="white"/>
+
+                      <!-- 黑色瞳孔 - 更偏左上 -->
+                      <circle cx="26" cy="34" r="5" fill="#1a1a1a"/>
+
+                      <!-- 瞳孔高光 - 主高光 -->
+                      <circle cx="24" cy="32" r="2" fill="white"/>
+
+                      <!-- 瞳孔高光 - 副高光小点 -->
+                      <circle cx="28" cy="36" r="0.8" fill="white" opacity="0.9"/>
+
+                      <!-- 信号波 - 右上角两条弧线，更向外扩散 -->
+                      <path d="
+                        M 40 14
+                        Q 47 8, 54 11
+                      " stroke="#FF6F00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+                      <path d="
+                        M 44 9
+                        Q 50 4, 57 7
+                      " stroke="#FF6F00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- 细微边缘阴影 -->
+                    <rect width="60" height="60" rx="13" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">微博</span>
+              </div>
+
+              <!-- 微信 - 官方风格 -->
+              <div class="app-icon" data-app="wechat">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <rect width="60" height="60" rx="13" fill="#07C160"/>
+                    <!-- 大气泡 -->
+                    <path d="M22 10c-8.3 0-15 5.4-15 12c0 3.6 2 6.8 5 9l-2 5l6-3c1.9 0.6 4 1 6 1c8.3 0 15-5.4 15-12s-6.7-12-15-12z" fill="white"/>
+                    <!-- 小气泡 -->
+                    <path d="M42 30c-6.6 0-12 4.3-12 9.5c0 2.9 1.6 5.4 4 7.2l-1.5 4l4.8-2.4c1.5 0.4 3 0.7 4.7 0.7c6.6 0 12-4.3 12-9.5S48.6 30 42 30z" fill="white"/>
+                    <!-- 大气泡眼睛 -->
+                    <circle cx="16" cy="20" r="2.5" fill="#07C160"/>
+                    <circle cx="28" cy="20" r="2.5" fill="#07C160"/>
+                    <!-- 小气泡眼睛 -->
+                    <circle cx="37" cy="38" r="2" fill="#07C160"/>
+                    <circle cx="47" cy="38" r="2" fill="#07C160"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">微信</span>
+              </div>
+            </div>
+
+            <!-- Dock -->
+            <div class="dock">
+              <!-- 电话 - 真实iOS风格 -->
+              <div class="app-icon" data-app="phone">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <defs>
+                      <linearGradient id="phoneBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4CDF6A"/>
+                        <stop offset="100%" stop-color="#28C940"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="60" height="60" rx="13" fill="url(#phoneBg)"/>
+                    <!-- 听筒 - 精确的iOS电话图标 -->
+                    <path d="M17.2 17.8c-1.5-1.5-1.5-3.7 0-5.2l2.95-2.95c1.5-1.5 3.7-1.5 5.2 0l5.85 5.85c1.5 1.5 1.5 3.7 0 5.2l-2.2 2.2c-0.75 0.75-0.75 1.92 0 2.67l10.25 10.25c0.75 0.75 1.92 0.75 2.67 0l2.2-2.2c1.5-1.5 3.7-1.5 5.2 0l5.85 5.85c1.5 1.5 1.5 3.7 0 5.2l-2.95 2.95c-1.5 1.5-3.7 1.5-5.2 0L17.2 17.8z" fill="white"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">电话</span>
+              </div>
+
+              <!-- 短信 - 真实iOS风格 -->
+              <div class="app-icon" data-app="messages">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <defs>
+                      <linearGradient id="msgBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4CDF6A"/>
+                        <stop offset="100%" stop-color="#28C940"/>
+                      </linearGradient>
+                      <clipPath id="msgClip">
+                        <rect width="60" height="60" rx="13"/>
+                      </clipPath>
+                    </defs>
+                    <rect width="60" height="60" rx="13" fill="url(#msgBg)"/>
+
+                    <!-- 使用clipPath确保所有元素都在圆角矩形内 -->
+                    <g clip-path="url(#msgClip)">
+                      <!-- 气泡主体 - 平滑贝塞尔曲线 -->
+                      <path d="
+                        M 12.5 20
+                        C 12.5 16, 15.5 13, 19.5 13
+                        L 40.5 13
+                        C 44.5 13, 47.5 16, 47.5 20
+                        L 47.5 32
+                        C 47.5 36, 44.5 39, 40.5 39
+                        L 26 39
+                        L 18 46
+                        L 18 39
+                        L 19.5 39
+                        C 15.5 39, 12.5 36, 12.5 32
+                        Z
+                      " fill="white"/>
+
+                      <!-- 三个点 - 完美圆形 -->
+                      <circle cx="22" cy="26.5" r="2.4" fill="#28C940"/>
+                      <circle cx="30" cy="26.5" r="2.4" fill="#28C940"/>
+                      <circle cx="38" cy="26.5" r="2.4" fill="#28C940"/>
+                    </g>
+
+                    <!-- 边缘高光增强立体感 -->
+                    <rect width="60" height="60" rx="13" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">短信</span>
+              </div>
+
+              <!-- 相册 - 真实iOS风格花瓣 -->
+              <div class="app-icon" data-app="photos">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <rect width="60" height="60" rx="13" fill="white"/>
+                    <!-- 花瓣 - iOS照片图标精确配色和形状 -->
+                    <ellipse cx="30" cy="19.5" rx="8.2" ry="12.3" fill="#FF5E5B" transform="rotate(0 30 30)"/>
+                    <ellipse cx="30" cy="19.5" rx="8.2" ry="12.3" fill="#FFC83D" transform="rotate(72 30 30)"/>
+                    <ellipse cx="30" cy="19.5" rx="8.2" ry="12.3" fill="#42C6A5" transform="rotate(144 30 30)"/>
+                    <ellipse cx="30" cy="19.5" rx="8.2" ry="12.3" fill="#3E9CD6" transform="rotate(216 30 30)"/>
+                    <ellipse cx="30" cy="19.5" rx="8.2" ry="12.3" fill="#8BC24A" transform="rotate(288 30 30)"/>
+                    <!-- 中心圆 - 更精确 -->
+                    <circle cx="30" cy="30" r="6.3" fill="white"/>
+                    <circle cx="30" cy="30" r="4.2" fill="#FFC83D"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">相册</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- APP详情页 -->
+          <div class="page page-app hidden-right" id="pageApp">
+            <div class="app-nav">
+              <button class="app-nav-back" id="backBtn">
+                <svg viewBox="0 0 12 20" width="12" height="20">
+                  <path d="M10 18L2 10l8-8" stroke="#007AFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </button>
+              <span class="app-nav-title" id="appTitle"></span>
+            </div>
+            <div class="app-body" id="appContent"></div>
+          </div>
+        </div>
+
+        <!-- Home Indicator -->
+        <div class="home-indicator">
+          <div class="home-indicator-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
