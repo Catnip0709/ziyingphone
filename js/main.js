@@ -111,5 +111,5 @@
     AppCore.goHome();
   });
 
-  console.log("[捡手机文学] 慕容紫英的手机已启动");
+  console.log(" 慕容紫英的手机已启动");
 })();
