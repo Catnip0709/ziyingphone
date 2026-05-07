@@ -1,0 +1,60 @@
+# ============================================
+# 我的微博
+# 格式说明：
+#   个人信息使用 key=value 写在最前面
+#   name=昵称
+#   handle=@账号
+#   avatarName=头像字
+#   avatarColor=头像颜色
+#   bio=签名，支持 \n 换行
+#   following=关注
+#   followers=粉丝
+#   likes=获赞与收藏
+#   [post] 个人微博
+#   [like] 点赞记录
+#   对应字段：
+#     time=时间
+#     content=正文，支持 \n 换行
+#     meta=附加信息
+#     images=图片数量
+# ============================================
+
+name=霜刃未改
+handle=@慕容紫英
+avatarName=紫
+avatarColor=#5B8DB8
+bio=琼华弟子。\n剑可守心，亦可护人。
+following=38
+followers=512
+likes=1834
+
+[post]
+time=今天 06:40
+content=晨起练剑，风静，雪未融。\n剑势尚可，心绪未平。
+meta=来自 承天剑台
+images=1
+
+[post]
+time=昨天 22:15
+content=有人说月色好，便陪她看了片刻。\n夜风偏凉，还是该多带一件外袍。
+meta=来自 昆仑后山
+
+[post]
+time=周一 18:02
+content=本月小比名单已核，诸弟子切莫懈怠。
+meta=来自 琼华派事务
+
+[like]
+time=今天 08:30
+content=乾坤一掷：某位剑仙嘴上说“无妨”，结果还是把我的药包、暖炉、点心都带齐了。
+meta=你赞了这条微博
+
+[like]
+time=昨天 21:06
+content=离香草：今夜月色很好，山风却仍有凉意。若有人深夜练剑，记得添衣。
+meta=你赞了这条微博
+
+[like]
+time=周日 14:22
+content=琼华派事务号：本月弟子小比报名已开启。
+meta=你赞了这条微博

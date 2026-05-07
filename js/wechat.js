@@ -16,7 +16,7 @@
       avatarColor: "#FF6B9D",
       time: "22:15",
       pinned: true,
-      txtPath: "text/lingsha_wechat.txt",
+      txtPath: "text/wechat/lingsha_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "菱纱": { avatarName: "纱", avatarColor: "#FF6B9D", isSelf: false }
@@ -28,7 +28,7 @@
       avatarColor: "#4A90D9",
       time: "21:30",
       pinned: false,
-      txtPath: "text/tianhe_wechat.txt",
+      txtPath: "text/wechat/tianhe_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "天河": { avatarName: "河", avatarColor: "#4A90D9", isSelf: false }
@@ -40,7 +40,7 @@
       avatarColor: "#9B7ED8",
       time: "昨天",
       pinned: false,
-      txtPath: "text/mengli_wechat.txt",
+      txtPath: "text/wechat/mengli_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "梦璃": { avatarName: "璃", avatarColor: "#9B7ED8", isSelf: false }
@@ -53,7 +53,7 @@
       time: "昨天",
       pinned: false,
       isGroup: true,
-      txtPath: "text/siqun_wechat.txt",
+      txtPath: "text/wechat/siqun_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "天河": { avatarName: "河", avatarColor: "#4A90D9", isSelf: false },
@@ -68,7 +68,7 @@
       time: "周一",
       pinned: false,
       isGroup: true,
-      txtPath: "text/qionghua_wechat.txt",
+      txtPath: "text/wechat/qionghua_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "掌门": { avatarName: "掌", avatarColor: "#2C3E50", isSelf: false }
@@ -80,7 +80,7 @@
       avatarColor: "#E67E22",
       time: "周一",
       pinned: false,
-      txtPath: "text/suxin_wechat.txt",
+      txtPath: "text/wechat/suxin_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
         "夙莘师叔": { avatarName: "莘", avatarColor: "#E67E22", isSelf: false }

@@ -1,0 +1,93 @@
+# ============================================
+# 微博推荐流
+# 格式说明：
+#   [post] 开始一条微博
+#   user=用户名
+#   handle=@账号
+#   avatarName=头像字
+#   avatarColor=头像颜色
+#   time=发布时间
+#   from=发布来源
+#   content=正文，支持 \n 换行
+#   images=图片数量
+#   repostUser=转发来源作者
+#   repostText=转发内容摘要
+#   likes=点赞数
+#   comments=评论数
+#   reposts=转发数
+#   comment=评论人|评论内容
+# ============================================
+
+[post]
+user=乾坤一掷
+handle=@韩菱纱
+avatarName=纱
+avatarColor=#FF6B9D
+time=3分钟前
+from=昆仑山脚
+content=某位剑仙嘴上说“无妨”，结果还是把我的药包、暖炉、点心都带齐了。\n嘴硬的人果然最好逗。
+images=3
+likes=128
+comments=21
+reposts=8
+comment=离香草|看得出来，他确实很在意你。
+comment=山猪也要练剑吗|紫英原来会准备点心？
+
+[post]
+user=山猪也要练剑吗
+handle=@云天河
+avatarName=河
+avatarColor=#4A90D9
+time=12分钟前
+from=承天剑台
+content=紫英今天教我一招新的剑势，还说“出剑之前先稳住气息”。\n我觉得我已经很稳了，就是剑先飞出去了。
+images=2
+likes=96
+comments=34
+reposts=15
+comment=乾坤一掷|你那叫剑飞出去了，人也差点飞出去了。
+comment=霜刃未改|练熟之前，不许独自尝试。
+
+[post]
+user=离香草
+handle=@柳梦璃
+avatarName=璃
+avatarColor=#9B7ED8
+time=25分钟前
+from=醉花荫
+content=今夜月色很好，山风却仍有凉意。\n若有人深夜练剑，记得添衣。
+likes=142
+comments=18
+reposts=20
+comment=乾坤一掷|这条是不是在点某个人？
+comment=夙莘师叔|点名不点姓，已经很温柔了。
+
+[post]
+user=夙莘师叔
+handle=@今天也不想带徒弟
+avatarName=莘
+avatarColor=#E67E22
+time=48分钟前
+from=下山路上
+content=带了两包点心回山，路上正好撞见霜刃未改。\n我说要不要替他分担一包，他居然护得比剑还紧。
+repostUser=乾坤一掷
+repostText=某位剑仙嘴上说“无妨”，结果还是把我的药包、暖炉、点心都带齐了。
+likes=203
+comments=40
+reposts=56
+comment=乾坤一掷|师叔你这叫实况转播。
+comment=山猪也要练剑吗|我能分到一块吗？
+
+[post]
+user=琼华派事务号
+handle=@琼华派发布
+avatarName=琼
+avatarColor=#2C3E50
+time=1小时前
+from=门派公告栏
+content=本月弟子小比报名已开启。\n御剑、剑术、身法三项均可报名，明日巳时截止。
+images=1
+likes=88
+comments=12
+reposts=61
+comment=掌门|各长老需于今日申时前提交裁判名单。

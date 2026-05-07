@@ -1,0 +1,76 @@
+# ============================================
+# 电话应用文案
+# 格式说明：
+#   [call] 开始一条通话记录
+#   通用字段使用 key=value
+#   支持字段：
+#     type=answered|missed|voicemail|outgoing
+#     name=联系人名称
+#     avatarName=头像字
+#     avatarColor=头像颜色
+#     time=通话时间
+#     status=状态文案
+#     duration=通话时长
+#     summary=摘要
+#     transcript=语音留言转写，支持 \n 换行
+# ============================================
+
+[call]
+type=answered
+name=韩菱纱
+avatarName=纱
+avatarColor=#FF6B9D
+time=今天 08:12
+status=已接来电
+duration=12分08秒
+summary=“你下山的时候记得帮我带桂花糕，别装没听见。” 
+
+[call]
+type=missed
+name=云天河
+avatarName=河
+avatarColor=#4A90D9
+time=今天 07:46
+status=未接来电
+summary=连续拨来 2 次
+
+[call]
+type=voicemail
+name=夙莘师叔
+avatarName=莘
+avatarColor=#E67E22
+time=昨天 22:31
+status=语音留言
+duration=00:18
+summary=小紫英，我给你留了言。
+transcript=小紫英，师叔给你带了点心。\n你若练剑练到忘了吃饭，记得回个电话。
+
+[call]
+type=outgoing
+name=柳梦璃
+avatarName=璃
+avatarColor=#9B7ED8
+time=昨天 20:05
+status=已拨电话
+duration=04分21秒
+summary=询问菱纱今日的身体状况
+
+[call]
+type=missed
+name=琼华派事务号
+avatarName=琼
+avatarColor=#2C3E50
+time=周一 09:10
+status=未接来电
+summary=门派事务提醒
+
+[call]
+type=voicemail
+name=掌门
+avatarName=掌
+avatarColor=#34495E
+time=周一 07:58
+status=语音留言
+duration=00:12
+summary=请于午时前往大殿议事。
+transcript=紫英，午时前到大殿一趟。\n本月弟子考核安排需要你过目。

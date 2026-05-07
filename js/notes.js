@@ -5,41 +5,158 @@
 (function() {
   "use strict";
 
-  var notesData = [
-    {
-      id: 1,
-      title: "\u83f1\u7eb1\u7684\u5bd2\u75c7\u53d1\u4f5c\u65f6\u95f4",
-      date: "2024\u5e745\u67087\u65e5",
-      preview: "\u8bb0\u5f55\u83f1\u7eb1\u8fd1\u4e00\u5e74\u6765\u5bd2\u75c7\u53d1\u4f5c\u7684\u60c5\u51b5\uff0c\u6bcf\u6b21\u53d1\u4f5c\u65f6\u7684\u75c7\u72b6\u4e0e\u6301\u7eed\u65f6\u95f4...",
-      content: [
-        { date: "2024\u5e745\u67083\u65e5", text: "\u4eca\u65e5\u4e11\u65f6\uff0c\u83f1\u7eb1\u5bd2\u75c7\u518d\u6b21\u53d1\u4f5c\u3002\u5979\u9762\u8272\u82cd\u767d\u5982\u7eb8\uff0c\u53cc\u624b\u51b0\u51c9\uff0c\u6574\u4e2a\u4eba\u8737\u7f29\u5728\u5e8a\u89d2\u98a4\u6296\u4e0d\u6b62\u3002\u6211\u4ee5\u7075\u529b\u4e3a\u5979\u9a71\u5bd2\uff0c\u7ea6\u83ab\u4e00\u4e2a\u65f6\u8fb0\u540e\u624d\u7a0d\u6709\u597d\u8f6c\u3002\u5979\u8bf4\u8fd9\u6b21\u53d1\u4f5c\u6bd4\u4e0a\u6b21\u66f4\u96be\u53d7\uff0c\u80f8\u53e3\u50cf\u88ab\u51b0\u9488\u523a\u7a7f\u4e00\u822c\u3002" },
-        { date: "2024\u5e744\u670818\u65e5", text: "\u6e05\u660e\u8fc7\u540e\uff0c\u83f1\u7eb1\u7684\u8eab\u4f53\u4f3c\u4e4e\u66f4\u5dee\u4e86\u4e9b\u3002\u4eca\u65e5\u7533\u65f6\u4fbf\u5f00\u59cb\u53d1\u4f5c\uff0c\u6bd4\u5f80\u5e38\u65e9\u4e86\u8bb8\u591a\u3002\u5979\u5f3a\u6491\u7740\u4e0d\u8ba9\u6211\u62c5\u5fc3\uff0c\u4f46\u6211\u5206\u660e\u770b\u5230\u5979\u989d\u5934\u7684\u51b7\u6c57\u548c\u5fae\u5fae\u53d1\u7d2b\u7684\u5507\u8272\u3002\u5bd2\u6c14\u4fb5\u5165\u9aa8\u9ad3\uff0c\u6211\u6015\u662f..." },
-        { date: "2024\u5e743\u670821\u65e5", text: "\u6625\u5206\u3002\u672c\u8be5\u662f\u9633\u6c14\u6e10\u76db\u4e4b\u65f6\uff0c\u83f1\u7eb1\u5374\u5728\u5bc5\u65f6\u88ab\u5bd2\u75c7\u6298\u78e8\u9192\u3002\u5979\u8bf4\u8fd9\u6b21\u53d1\u4f5c\u65f6\uff0c\u773c\u524d\u51fa\u73b0\u4e86\u8bb8\u591a\u5e7b\u8c61\uff0c\u90fd\u662f\u4e9b\u5df2\u7ecf\u79bb\u53bb\u7684\u6545\u4eba\u3002\u6211\u63e1\u7740\u5979\u7684\u624b\uff0c\u611f\u53d7\u7740\u90a3\u523a\u9aa8\u7684\u5bd2\u610f\uff0c\u5fc3\u4e2d\u9690\u9690\u4f5c\u75db\u3002" },
-        { date: "2024\u5e742\u670814\u65e5", text: "\u5143\u5bb5\u521a\u8fc7\uff0c\u83f1\u7eb1\u7684\u5bd2\u75c7\u53c8\u53d1\u4f5c\u4e86\u3002\u8fd9\u6b21\u6301\u7eed\u4e86\u5c06\u8fd1\u4e24\u4e2a\u65f6\u8fb0\uff0c\u6bd4\u4ee5\u5f80\u4efb\u4f55\u4e00\u6b21\u90fd\u8981\u957f\u3002\u5979\u865a\u5f31\u5730\u9760\u5728\u6211\u80a9\u4e0a\uff0c\u8f7b\u58f0\u8bf4\uff1a\u300c\u7d2b\u82f1\uff0c\u6211\u662f\u4e0d\u662f...\u6d3b\u4e0d\u8fc7\u8fd9\u4e2a\u6625\u5929\u4e86\uff1f\u300d\u6211\u7d27\u7d27\u63e1\u4f4f\u5979\u7684\u624b\uff0c\u4e0d\u77e5\u8be5\u5982\u4f55\u4f5c\u7b54\u3002" },
-        { date: "2024\u5e741\u670828\u65e5", text: "\u9664\u5915\u591c\uff0c\u672c\u8be5\u662f\u56e2\u5706\u559c\u5e86\u4e4b\u65f6\uff0c\u83f1\u7eb1\u5374\u5728\u4ea5\u65f6\u53d1\u4f5c\u3002\u5979\u5f3a\u5fcd\u7740\u75bc\u75db\uff0c\u4e0d\u60f3\u7834\u574f\u5927\u5bb6\u7684\u5174\u81f4\u3002\u6211\u627e\u4e86\u4e2a\u501f\u53e3\u5e26\u5979\u79bb\u5f00\uff0c\u5728\u96ea\u5730\u91cc\u4e3a\u5979\u8fd0\u529f\u9a71\u5bd2\u3002\u5979\u7b11\u7740\u8bf4\uff1a\u300c\u7d2b\u82f1\uff0c\u6709\u4f60\u5728\u8eab\u8fb9\uff0c\u518d\u51b7\u7684\u5bd2\u75c7\u6211\u4e5f\u4e0d\u6015\u3002\u300d" },
-        { date: "2023\u5e7412\u670815\u65e5", text: "\u5165\u51ac\u4ee5\u6765\uff0c\u83f1\u7eb1\u7684\u5bd2\u75c7\u53d1\u4f5c\u6108\u53d1\u9891\u7e41\u3002\u4eca\u65e5\u5df2\u662f\u672c\u6708\u7b2c\u4e09\u6b21\u3002\u5979\u7684\u8eab\u4f53\u6bcf\u51b5\u6108\u4e0b\uff0c\u6211\u80fd\u505a\u7684\u5374\u53ea\u6709\u4ee5\u7075\u529b\u6682\u65f6\u538b\u5236\u3002\u671b\u8212\u5251\u7684\u5bd2\u6c14\u4e0e\u5979\u7684\u4f53\u8d28\u76f8\u51b2\uff0c\u8fd9\u662f\u65e9\u5df2\u6ce8\u5b9a\u7684\u5bbf\u547d\uff0c\u53ef\u6211..." },
-        { date: "2023\u5e7411\u67088\u65e5", text: "\u7acb\u51ac\u3002\u83f1\u7eb1\u4eca\u65e5\u672a\u65f6\u4fbf\u5f00\u59cb\u53d1\u4f5c\uff0c\u6bd4\u9884\u60f3\u4e2d\u66f4\u65e9\u3002\u5979\u8bf4\u6700\u8fd1\u603b\u662f\u611f\u5230\u7b2e\u60eb\uff0c\u8fde\u5fa1\u5251\u98de\u884c\u90fd\u89c9\u5f97\u5403\u529b\u3002\u6211\u6697\u81ea\u51b3\u5b9a\uff0c\u8981\u66f4\u52a0\u5bc6\u5207\u5730\u5173\u6ce8\u5979\u7684\u8eab\u4f53\u72b6\u51b5\u3002" },
-        { date: "2023\u5e7410\u67081\u65e5", text: "\u4eca\u65e5\u83f1\u7eb1\u5bd2\u75c7\u53d1\u4f5c\uff0c\u6070\u9022\u6211\u4eec\u9014\u7ecf\u4e00\u5904\u6e29\u6cc9\u3002\u6211\u5e26\u5979\u5728\u6e29\u6cc9\u8fb9\u4f11\u606f\uff0c\u6e29\u70ed\u7684\u6c34\u6c7d\u4f3c\u4e4e\u8ba9\u5979\u7684\u75c7\u72b6\u7f13\u89e3\u4e86\u4e0d\u5c11\u3002\u5979\u9760\u5728\u6211\u80a9\u4e0a\uff0c\u8f7b\u58f0\u8bf4\uff1a\u300c\u7d2b\u82f1\uff0c\u5982\u679c\u53ef\u4ee5\uff0c\u6211\u771f\u60f3\u5c31\u8fd9\u6837\u4e00\u76f4\u5f85\u4e0b\u53bb...\u300d" }
-      ]
+  var NOTES_INDEX_PATH = "text/note/notes_index.txt";
+  var NOTES_BASE_PATH = "text/note/";
+  var notesIndex = [];
+  var noteDetailCache = {};
+  var notesIndexLoaded = false;
+  var notesEventsBound = false;
+
+  function escapeHtml(text) {
+    var div = document.createElement("div");
+    div.textContent = text || "";
+    return div.innerHTML;
+  }
+
+  function formatText(text) {
+    return escapeHtml(text || "").replace(/\n/g, "<br>");
+  }
+
+  function loadTextFile(path, callback) {
+    var controller = new AbortController();
+    var timeoutId = setTimeout(function() {
+      controller.abort();
+      callback("");
+    }, 10000);
+
+    fetch(path, { signal: controller.signal })
+      .then(function(res) {
+        clearTimeout(timeoutId);
+        if (!res.ok) {
+          throw new Error("HTTP " + res.status);
+        }
+        return res.text();
+      })
+      .then(function(text) {
+        callback(text);
+      })
+      .catch(function() {
+        clearTimeout(timeoutId);
+        callback("");
+      });
+  }
+
+  function parseNotesIndex(text) {
+    var notes = [];
+    var currentNote = null;
+
+    function pushCurrentNote() {
+      if (!currentNote) return;
+      currentNote.id = parseInt(currentNote.id, 10) || Date.now();
+      currentNote.title = currentNote.title || "未命名备忘录";
+      currentNote.date = currentNote.date || "";
+      currentNote.preview = currentNote.preview || "";
+      currentNote.file = currentNote.file || "";
+      notes.push(currentNote);
+      currentNote = null;
     }
-  ];
+
+    text.split("\n").forEach(function(rawLine) {
+      var line = rawLine.trim();
+      var match;
+
+      if (!line || line.startsWith("#")) {
+        return;
+      }
+
+      if (line === "[note]") {
+        pushCurrentNote();
+        currentNote = {};
+        return;
+      }
+
+      match = line.match(/^([^=]+)=(.*)$/);
+      if (!match || !currentNote) {
+        return;
+      }
+
+      currentNote[match[1].trim()] = (match[2].trim() || "").replace(/\\n/g, "\n");
+    });
+
+    pushCurrentNote();
+    return notes;
+  }
+
+  function parseNoteDetail(text) {
+    var note = {
+      title: "",
+      date: "",
+      content: []
+    };
+    var currentEntry = null;
+
+    function pushEntry() {
+      if (!currentEntry) return;
+      note.content.push({
+        date: currentEntry.date || "",
+        text: currentEntry.text || ""
+      });
+      currentEntry = null;
+    }
+
+    text.split("\n").forEach(function(rawLine) {
+      var line = rawLine.trim();
+      var match;
+
+      if (!line || line.startsWith("#")) {
+        return;
+      }
+
+      if (line === "[entry]") {
+        pushEntry();
+        currentEntry = {};
+        return;
+      }
+
+      match = line.match(/^([^=]+)=(.*)$/);
+      if (!match) {
+        return;
+      }
+
+      var key = match[1].trim();
+      var value = (match[2].trim() || "").replace(/\\n/g, "\n");
+
+      if (currentEntry) {
+        currentEntry[key] = value;
+      } else {
+        note[key] = value;
+      }
+    });
+
+    pushEntry();
+    return note;
+  }
+
+  function renderLoadingState() {
+    return '<div class="notes-list"><div class="notes-list-header"><h1>备忘录</h1><div class="notes-search-wrapper"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg><input type="text" class="notes-search" placeholder="搜索"></div></div><div class="notes-group-title">iCloud</div><div class="notes-item"><div class="notes-item-title">正在加载</div><div class="notes-item-preview">正在读取备忘录文本内容...</div><div class="notes-item-date"></div></div></div>';
+  }
 
   function renderNotesList() {
     var html = '<div class="notes-list">';
     html += '<div class="notes-list-header">';
-    html += '<h1>\u5907\u5fd8\u5f55</h1>';
+    html += '<h1>备忘录</h1>';
     html += '<div class="notes-search-wrapper">';
     html += '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">';
     html += '<circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>';
-    html += '<input type="text" class="notes-search" placeholder="\u641c\u7d22">';
+    html += '<input type="text" class="notes-search" placeholder="搜索">';
     html += '</div></div>';
     html += '<div class="notes-group-title">iCloud</div>';
 
-    notesData.forEach(function(note) {
+    notesIndex.forEach(function(note) {
       html += '<div class="notes-item" data-note-id="' + note.id + '">';
-      html += '<div class="notes-item-title">' + note.title + '</div>';
-      html += '<div class="notes-item-preview">' + note.preview + '</div>';
-      html += '<div class="notes-item-date">' + note.date + '</div>';
+      html += '<div class="notes-item-title">' + escapeHtml(note.title) + '</div>';
+      html += '<div class="notes-item-preview">' + escapeHtml(note.preview) + '</div>';
+      html += '<div class="notes-item-date">' + escapeHtml(note.date) + '</div>';
       html += '</div>';
     });
 
@@ -48,36 +165,120 @@
   }
 
   function renderNotesDetail(noteId) {
-    var note = notesData.find(function(n) { return n.id === noteId; });
-    if (!note) return '';
+    var note = noteDetailCache[noteId];
+    if (!note) return "";
 
     var html = '<div class="notes-detail">';
     html += '<div class="notes-detail-header">';
-    html += '<div class="notes-detail-title">' + note.title + '</div>';
-    html += '<div class="notes-detail-meta">' + note.date + '</div>';
+    html += '<div class="notes-detail-title">' + escapeHtml(note.title) + '</div>';
+    html += '<div class="notes-detail-meta">' + escapeHtml(note.date) + '</div>';
     html += '</div>';
     html += '<div class="notes-detail-content">';
 
     note.content.forEach(function(item) {
-      html += '<p class="date-line">' + item.date + '</p>';
-      html += '<p class="note-text">' + item.text + '</p>';
+      html += '<p class="date-line">' + escapeHtml(item.date) + '</p>';
+      html += '<p class="note-text">' + formatText(item.text) + '</p>';
     });
 
     html += '</div></div>';
     return html;
   }
 
-  function bindNotesEvents() {
-    var items = document.querySelectorAll(".notes-item");
-    items.forEach(function(item) {
-      item.addEventListener("click", function() {
-        var noteId = parseInt(this.getAttribute("data-note-id"));
-        document.getElementById("appTitle").textContent = "备忘录";
-        document.getElementById("appContent").innerHTML = renderNotesDetail(noteId);
-      });
+  function loadNotesIndex(callback) {
+    if (notesIndexLoaded) {
+      callback(notesIndex);
+      return;
+    }
+
+    loadTextFile(NOTES_INDEX_PATH, function(text) {
+      notesIndex = parseNotesIndex(text);
+      notesIndexLoaded = true;
+      callback(notesIndex);
     });
   }
 
+  function loadNoteDetail(noteId, callback) {
+    if (noteDetailCache[noteId]) {
+      callback(noteDetailCache[noteId]);
+      return;
+    }
+
+    var noteMeta = notesIndex.find(function(note) {
+      return note.id === noteId;
+    });
+
+    if (!noteMeta || !noteMeta.file) {
+      callback(null);
+      return;
+    }
+
+    loadTextFile(NOTES_BASE_PATH + noteMeta.file, function(text) {
+      var detail = parseNoteDetail(text);
+      detail.id = noteId;
+      noteDetailCache[noteId] = detail;
+      callback(detail);
+    });
+  }
+
+  function renderNotesApp() {
+    if (!notesIndexLoaded) {
+      return renderLoadingState();
+    }
+    return renderNotesList();
+  }
+
+  function openNotesList() {
+    var appContent = document.getElementById("appContent");
+    if (!appContent) return;
+
+    appContent.innerHTML = renderLoadingState();
+    loadNotesIndex(function() {
+      appContent.innerHTML = renderNotesList();
+    });
+  }
+
+  function openNotesDetail(noteId) {
+    var appContent = document.getElementById("appContent");
+    if (!appContent) return;
+
+    appContent.innerHTML = '<div class="notes-detail"><div class="notes-detail-header"><div class="notes-detail-title">正在加载</div><div class="notes-detail-meta"></div></div><div class="notes-detail-content"><p class="note-text">正在读取备忘录正文...</p></div></div>';
+
+    loadNoteDetail(noteId, function(note) {
+      if (!note) return;
+      document.getElementById("appTitle").textContent = "备忘录";
+      appContent.innerHTML = renderNotesDetail(noteId);
+    });
+  }
+
+  function bindNotesEvents() {
+    if (!notesEventsBound) {
+      notesEventsBound = true;
+
+      document.addEventListener("click", function(e) {
+        var noteItem = e.target.closest(".notes-item");
+        var appContent = document.getElementById("appContent");
+        if (!noteItem || !appContent || !appContent.contains(noteItem)) {
+          return;
+        }
+
+        var noteId = parseInt(noteItem.getAttribute("data-note-id"), 10);
+        if (isNaN(noteId)) {
+          return;
+        }
+        openNotesDetail(noteId);
+      });
+    }
+
+    openNotesList();
+  }
+
+  window.NotesTextLoader = {
+    loadIndex: loadNotesIndex,
+    loadDetail: loadNoteDetail,
+    parseIndex: parseNotesIndex,
+    parseDetail: parseNoteDetail
+  };
+
   // 注册到AppCore
-  window.AppCore.registerApp("notes", renderNotesList, bindNotesEvents);
+  window.AppCore.registerApp("notes", renderNotesApp, bindNotesEvents);
 })();

@@ -20,7 +20,7 @@
   };
 
   var DEFAULT_LINGSHA_CONFIG = {
-    txtPath: "text/lingsha_wechat.txt",
+    txtPath: "text/wechat/lingsha_wechat.txt",
     chatInfo: {
       name: "菱纱",
       avatar: "纱",

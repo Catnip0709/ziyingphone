@@ -6,7 +6,7 @@
 var MomentsComponents = (function() {
   "use strict";
 
-  var DEFAULT_MOMENTS_TXT_PATH = "text/pengyouquan.txt";
+  var DEFAULT_MOMENTS_TXT_PATH = "text/wechat/pengyouquan.txt";
   var DEFAULT_USER_INFO = {
     name: "慕容紫英",
     avatarName: "英",
