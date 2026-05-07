@@ -615,6 +615,111 @@ body {
 }
 
 /* ========================================
+   WeRead App - 微信读书
+   ======================================== */
+.weread-app {
+  flex: 1;
+  min-height: 0;
+  background: #F6F7F8;
+  display: flex;
+  flex-direction: column;
+}
+
+.weread-header {
+  padding: 18px 20px 14px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7FBF8 100%);
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+}
+
+.weread-header h1 {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #111;
+}
+
+.weread-subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #7C8A84;
+}
+
+.weread-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 12px calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
+.weread-list::-webkit-scrollbar {
+  display: none;
+}
+
+.weread-book-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #FFF;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 6px 24px rgba(12,23,41,0.05);
+}
+
+.weread-book-card + .weread-book-card {
+  margin-top: 12px;
+}
+
+.weread-book-cover {
+  width: 58px;
+  height: 78px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #46C97D, #23B46B);
+  color: rgba(255,255,255,0.96);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.weread-book-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.weread-book-title {
+  font-size: 17px;
+  line-height: 1.4;
+  color: #181818;
+  font-weight: 700;
+}
+
+.weread-book-meta {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #25B66F;
+  font-weight: 600;
+}
+
+.weread-book-desc {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5F6368;
+}
+
+.weread-book-card.is-easter-egg .weread-book-cover {
+  background: linear-gradient(160deg, #D4A64A, #8E5E1F);
+}
+
+.weread-book-card.is-easter-egg .weread-book-meta {
+  color: #9B6B2D;
+}
+
+/* ========================================
    Weibo App - 微博应用
    ======================================== */
 .weibo-app {

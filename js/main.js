@@ -17,12 +17,13 @@
 
   // ---------- 应用名称映射 ----------
   var APP_NAMES = {
-    notes:    "备忘录",
-    wechat:   "微信",
-    weibo:    "微博",
-    phone:    "电话",
-    messages: "短信",
-    photos:   "相册"
+    notes:        "备忘录",
+    wechat:       "微信",
+    wechatbook:   "微信读书",
+    weibo:        "微博",
+    phone:        "电话",
+    messages:     "短信",
+    photos:       "相册"
   };
 
   // ---------- AppCore 核心 ----------
