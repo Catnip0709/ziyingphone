@@ -60,16 +60,16 @@ likes=142
 comments=18
 reposts=20
 comment=乾坤一掷|这条是不是在点某个人？
-comment=夙莘师叔|点名不点姓，已经很温柔了。
+comment=今天也不想带徒弟|点名不点姓，已经很温柔了。
 
 [post]
-user=夙莘师叔
-handle=@今天也不想带徒弟
+user=今天也不想带徒弟
+handle=@夙莘
 avatarName=莘
 avatarColor=#E67E22
 time=48分钟前
 from=下山路上
-content=带了两包点心回山，路上正好撞见霜刃未改。\n我说要不要替他分担一包，他居然护得比剑还紧。
+content=带了两包点心回山，路上正好撞见紫英。\n我说要不要替他分担一包，他居然护得比剑还紧。
 repostUser=乾坤一掷
 repostText=某位剑仙嘴上说“无妨”，结果还是把我的药包、暖炉、点心都带齐了。
 likes=203
