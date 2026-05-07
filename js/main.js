@@ -20,6 +20,7 @@
     notes:        "备忘录",
     wechat:       "微信",
     wechatbook:   "微信读书",
+    deepseek:     "DeepSeek",
     weibo:        "微博",
     phone:        "电话",
     messages:     "短信",
