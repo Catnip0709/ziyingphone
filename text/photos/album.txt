@@ -1,0 +1,5 @@
+# 相册清单
+# 每行一个文件名，对应 picture/album/ 下的图片
+# 支持 jpg、jpeg、png、webp、gif
+
+ziying.jpg

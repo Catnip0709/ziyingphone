@@ -7,6 +7,7 @@
   "use strict";
 
   var PHOTOS_DIR = "picture/album/";
+  var PHOTOS_LIST_PATH = "text/photos/album.txt";
   var PHOTO_EXT_RE = /\.(jpe?g|png|webp|gif)$/i;
   var cachedPhotos = null;
   var currentViewerState = null;
@@ -44,24 +45,22 @@
     return decodeURIComponent(name || "").replace(/\.[^.]+$/, "");
   }
 
-  function parseDirectoryListing(html) {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(html, "text/html");
-    var links = Array.prototype.slice.call(doc.querySelectorAll("a"));
+  function parsePhotoList(text) {
     var photos = [];
     var seen = {};
+    var lines = String(text || "").split(/\r?\n/);
 
-    links.forEach(function (link) {
-      var href = link.getAttribute("href") || "";
-      if (!href || href === "../") return;
-      href = href.split("?")[0].split("#")[0];
-      if (!PHOTO_EXT_RE.test(href)) return;
-      if (seen[href]) return;
-      seen[href] = true;
+    lines.forEach(function (line) {
+      var fileName = line.trim();
+      if (!fileName || fileName.charAt(0) === "#") return;
+      fileName = fileName.split("?")[0].split("#")[0].trim();
+      if (!PHOTO_EXT_RE.test(fileName)) return;
+      if (seen[fileName]) return;
+      seen[fileName] = true;
       photos.push({
-        fileName: href,
-        url: PHOTOS_DIR + href,
-        title: getPhotoTitle(href),
+        fileName: fileName,
+        url: PHOTOS_DIR + encodeURIComponent(fileName),
+        title: getPhotoTitle(fileName),
         capturedAt: null,
         modifiedAt: null,
         size: "",
@@ -72,14 +71,14 @@
     return photos;
   }
 
-  function fetchPhotoDirectory(callback) {
-    fetch(PHOTOS_DIR)
+  function fetchPhotoList(callback) {
+    fetch(PHOTOS_LIST_PATH)
       .then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
         return res.text();
       })
-      .then(function (html) {
-        callback(parseDirectoryListing(html));
+      .then(function (text) {
+        callback(parsePhotoList(text));
       })
       .catch(function () {
         callback([]);
@@ -240,13 +239,13 @@
     var html = '<div class="photos-app">';
     html += '<div class="photos-header">';
     html += "<h1>相册</h1>";
-    html += '<div class="photos-subtitle">自动读取 picture/album 里的图片</div>';
+    html += '<div class="photos-subtitle">按清单读取 picture/album 里的图片</div>';
     html += "</div>";
     html += '<div class="photos-grid">';
     if (!photos || !photos.length) {
       html += '<div class="photos-empty">';
       html += '<div class="photos-empty-title">相册里还没有图片</div>';
-      html += '<div class="photos-empty-text">把 jpg、jpeg、png、webp 或 gif 放进 `picture/album` 后刷新页面，这里就会自动显示。</div>';
+      html += '<div class="photos-empty-text">把图片放进 `picture/album`，并把文件名写进 `text/photos/album.txt` 后刷新页面，这里就会显示。</div>';
       html += "</div>";
     } else {
       photos.forEach(function (photo, index) {
@@ -316,7 +315,7 @@
   }
 
   function loadPhotos(callback) {
-    fetchPhotoDirectory(function (photos) {
+    fetchPhotoList(function (photos) {
       Promise.all(photos.map(loadPhotoHead)).then(function (loadedPhotos) {
         loadedPhotos.sort(function (a, b) {
           var ta = a.modifiedAt ? a.modifiedAt.getTime() : 0;
@@ -330,7 +329,7 @@
   }
 
   function renderLoading() {
-    return '<div class="photos-app"><div class="photos-header"><h1>相册</h1><div class="photos-subtitle">正在扫描 picture/album...</div></div><div class="photos-grid"><div class="photos-empty"><div class="photos-empty-title">正在读取图片</div><div class="photos-empty-text">请稍候。</div></div></div><div class="photos-viewer-host"></div></div>';
+    return '<div class="photos-app"><div class="photos-header"><h1>相册</h1><div class="photos-subtitle">正在读取 text/photos/album.txt...</div></div><div class="photos-grid"><div class="photos-empty"><div class="photos-empty-title">正在读取图片</div><div class="photos-empty-text">请稍候。</div></div></div><div class="photos-viewer-host"></div></div>';
   }
 
   function openPhotosApp(forceReload) {
