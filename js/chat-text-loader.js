@@ -29,6 +29,13 @@
     characters: DEFAULT_CHARACTERS
   };
 
+  var SYSTEM_MESSAGE_TYPES = {
+    revoke: true,
+    pat: true,
+    groupnotice: true,
+    memberchange: true
+  };
+
   // ---------- 解析 TXT 文案 ----------
   function parseChatText(text, characters) {
     var messages = [];
@@ -54,6 +61,24 @@
           time: timeStr
         });
         i++;
+        continue;
+      }
+
+      var systemMatch = line.match(/^\[(\w+)(?::([^\]]*))?\]\s*(.*)$/);
+      if (systemMatch && SYSTEM_MESSAGE_TYPES[systemMatch[1]]) {
+        var systemType = systemMatch[1];
+        var inlineText = systemMatch[3].trim();
+        var bodyText = "";
+        var nextIndex = i + 1;
+        // 仅 groupnotice / memberchange 需要读取后续多行正文
+        if (systemType === "groupnotice" || systemType === "memberchange") {
+          var systemBody = collectMessageBody(lines, i + 1, senderPattern);
+          bodyText = systemBody.text;
+          nextIndex = systemBody.nextIndex;
+        }
+        var systemData = parseSystemMessage(systemType, systemMatch[2] || "", mergeMessageText(inlineText, bodyText));
+        messages.push(systemData);
+        i = nextIndex;
         continue;
       }
 
@@ -93,7 +118,14 @@
           name: msgData.name,
           address: msgData.address,
           emoji: msgData.emoji,
-          url: msgData.url
+          url: msgData.url,
+          source: msgData.source,
+          description: msgData.description,
+          fileName: msgData.fileName,
+          fileSize: msgData.fileSize,
+          actor: msgData.actor,
+          target: msgData.target,
+          summary: msgData.summary
         });
         i = messageBody.nextIndex;
         continue;
@@ -135,6 +167,7 @@
 
       if (trimmedLine.startsWith("#") ||
           trimmedLine.startsWith("[time]") ||
+          isStandaloneSystemLine(trimmedLine) ||
           senderPattern.test(trimmedLine)) {
         break;
       }
@@ -147,6 +180,11 @@
       text: bodyLines.join("\n"),
       nextIndex: i
     };
+  }
+
+  function isStandaloneSystemLine(line) {
+    var match = line.match(/^\[(\w+)(?::([^\]]*))?\]\s*(.*)$/);
+    return !!(match && SYSTEM_MESSAGE_TYPES[match[1]]);
   }
 
   function parseMessageContent(rest, bodyText) {
@@ -164,7 +202,14 @@
       name: null,
       address: null,
       emoji: null,
-      url: null
+      url: null,
+      source: null,
+      description: null,
+      fileName: null,
+      fileSize: null,
+      actor: null,
+      target: null,
+      summary: null
     };
 
     bodyText = bodyText || "";
@@ -242,11 +287,103 @@
         result.text = content;
         break;
 
+      case "file":
+        result.msgType = "file";
+        var fileParts = params.split(":");
+        result.fileName = fileParts[0] || "";
+        result.fileSize = fileParts[1] || "";
+        result.text = content;
+        break;
+
+      case "share":
+        result.msgType = "share";
+        var shareParts = params.split(":");
+        result.title = shareParts[0] || "";
+        result.source = shareParts[1] || "";
+        result.text = content;
+        break;
+
+      case "link":
+        result.msgType = "link";
+        var linkParts = params.split(":");
+        result.title = linkParts[0] || "";
+        result.source = linkParts[1] || "";
+        result.text = content;
+        break;
+
+      case "miniapp":
+        result.msgType = "miniapp";
+        var miniappParts = params.split(":");
+        result.title = miniappParts[0] || "";
+        result.source = miniappParts[1] || "";
+        result.text = content;
+        break;
+
+      case "favorite":
+        result.msgType = "favorite";
+        var favoriteParts = params.split(":");
+        result.title = favoriteParts[0] || "";
+        result.source = favoriteParts[1] || "";
+        result.text = content;
+        break;
+
+      case "groupcollect":
+        result.msgType = "groupcollect";
+        var collectParts = params.split(":");
+        result.title = collectParts[0] || "";
+        result.amount = collectParts[1] || "";
+        result.status = collectParts[2] || "";
+        result.text = content;
+        break;
+
       default:
         result.text = content;
     }
 
     return result;
+  }
+
+  function parseSystemMessage(type, params, content) {
+    var data = {
+      type: "system",
+      systemType: type,
+      text: content || "",
+      title: "",
+      actor: "",
+      target: "",
+      summary: ""
+    };
+
+    switch (type) {
+      case "revoke":
+        data.actor = params || "";
+        data.text = content || (data.actor ? data.actor + " 撤回了一条消息" : "有消息被撤回");
+        break;
+      case "pat":
+        var patParts = (params || "").split(":");
+        data.actor = (patParts[0] || "").trim();
+        data.target = (patParts[1] || "").trim();
+        if (content) {
+          data.text = content;
+        } else if (data.actor && data.target) {
+          data.text = data.actor + " 拍了拍 " + data.target;
+        } else {
+          data.text = "有人拍了拍群友";
+        }
+        break;
+      case "groupnotice":
+        data.title = params || "群公告";
+        data.text = content || "";
+        break;
+      case "memberchange":
+        data.summary = params || "";
+        data.text = content || "";
+        break;
+      default:
+        data.text = content || "";
+    }
+
+    return data;
   }
 
   function mergeMessageText(inlineText, blockText) {

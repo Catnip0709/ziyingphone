@@ -23,6 +23,42 @@
       }
     },
     {
+      name: "月桂坊阿福",
+      avatar: "🧁",
+      avatarColor: "#D9B65D",
+      time: "4月27日",
+      pinned: false,
+      txtPath: "text/wechat/guihuagao_wechat.txt",
+      characters: {
+        "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
+        "月桂坊阿福": { avatarName: "🧁", avatarColor: "#D9B65D", isSelf: false }
+      }
+    },
+    {
+      name: "朱记糖球摊",
+      avatar: "🍡",
+      avatarColor: "#E85D75",
+      time: "4月25日",
+      pinned: false,
+      txtPath: "text/wechat/tanghulu_wechat.txt",
+      characters: {
+        "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
+        "朱记糖球摊": { avatarName: "🍡", avatarColor: "#E85D75", isSelf: false }
+      }
+    },
+    {
+      name: "暖瓷粥记",
+      avatar: "🥣",
+      avatarColor: "#C88C5A",
+      time: "4月29日",
+      pinned: false,
+      txtPath: "text/wechat/zhoupu_wechat.txt",
+      characters: {
+        "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
+        "暖瓷粥记": { avatarName: "🥣", avatarColor: "#C88C5A", isSelf: false }
+      }
+    },
+    {
       name: "天河",
       avatar: "河",
       avatarColor: "#4A90D9",
@@ -71,7 +107,10 @@
       txtPath: "text/wechat/qionghua_wechat.txt",
       characters: {
         "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
-        "掌门": { avatarName: "掌", avatarColor: "#2C3E50", isSelf: false }
+        "掌门": { avatarName: "掌", avatarColor: "#2C3E50", isSelf: false },
+        "长老甲": { avatarName: "甲", avatarColor: "#7F8C8D", isSelf: false },
+        "长老乙": { avatarName: "乙", avatarColor: "#95A5A6", isSelf: false },
+        "怀朔": { avatarName: "怀", avatarColor: "#4E7D62", isSelf: false }
       }
     },
     {
