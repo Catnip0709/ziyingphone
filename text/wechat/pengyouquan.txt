@@ -169,19 +169,7 @@ images=1
 likes=慕容紫英,梦璃,天河,夙莘师叔,怀朔
 comment=梦璃||手艺不错。
 comment=天河||你给我编一个！
-comment=慕容紫英|天河|不编。
-
-[post]
-name=怀朔
-avatarName=怀
-avatarColor=#4E7D62
-time=3月18日
-text=本月内门切磋结果已张榜，\n第一：天河。第二：紫英师弟（弃赛半场，缘故自知）。\n@慕容紫英 师弟，下月可愿一战？
-remind=提到了 慕容紫英
-likes=掌门,夙莘师叔,天河
-comment=天河||怀朔师兄你是嫌我膨胀得不够大么！
-comment=慕容紫英|怀朔|改日再约，近来事多。
-comment=怀朔|慕容紫英|好。
+comment=慕容紫英|天河|……不编。
 
 [post]
 name=天河
