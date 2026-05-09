@@ -286,7 +286,8 @@
 
   function renderMeRow(icon, label, value, opts) {
     opts = opts || {};
-    var html = '<div class="wechat-me-row' + (opts.first ? ' first' : '') + '">';
+    var attr = opts.action ? ' data-me-action="' + escapeHtmlText(opts.action) + '"' : '';
+    var html = '<div class="wechat-me-row' + (opts.first ? ' first' : '') + '"' + attr + '>';
     if (icon) {
       html += '<span class="wechat-me-row-icon">' + icon + '</span>';
     }
@@ -334,7 +335,7 @@
       sticker: '<svg viewBox="0 0 24 24" fill="none" stroke="#E67E22" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 15c.8.7 1.8 1 3 1s2.2-.3 3-1"/></svg>'
     };
     html += '<div class="wechat-me-section">';
-    html += renderMeRow(blockIcons.favorite, '收藏', meProfile.favorites.length + ' 项', { first: true });
+    html += renderMeRow(blockIcons.favorite, '收藏', meProfile.favorites.length + ' 项', { first: true, action: 'open-favorites' });
     html += renderMeRow(blockIcons.album, '相册', '', {});
     html += renderMeRow(blockIcons.card, '卡包', '', {});
     html += renderMeRow(blockIcons.sticker, '表情', '', {});
@@ -346,25 +347,65 @@
     html += renderMeRow(settingIcon, '设置', '', { first: true });
     html += '</div>';
 
-    // 收藏夹卡片预览
-    html += '<div class="wechat-me-favorites">';
-    html += '<div class="wechat-me-favorites-title">收藏夹</div>';
-    html += '<div class="wechat-me-favorites-list">';
-    meProfile.favorites.forEach(function (fav) {
-      var icon = FAV_ICONS[fav.type] || FAV_ICONS.text;
-      html += '<div class="wechat-fav-item">';
-      html += '<div class="wechat-fav-icon type-' + escapeHtmlText(fav.type) + '">' + icon + '</div>';
-      html += '<div class="wechat-fav-main">';
-      html += '<div class="wechat-fav-title">' + escapeHtmlText(fav.title) + '</div>';
-      html += '<div class="wechat-fav-meta"><span>' + escapeHtmlText(fav.source) + '</span><span>' + escapeHtmlText(fav.time) + '</span></div>';
-      html += '</div>';
-      html += '</div>';
-    });
     html += '</div>';
+    return html;
+  }
+
+  // ---------- 收藏夹页面 ----------
+  function renderFavoritesPage() {
+    var html = '<div class="wechat-favorites-page">';
+
+    // 头部（返回按钮 + 标题 + 搜索/+号）
+    html += '<div class="wechat-chat-header wechat-favorites-header">';
+    html += '<div class="wechat-chat-back" data-action="back-from-favorites">';
+    html += '<svg viewBox="0 0 12 20" width="10" height="16"><path d="M10 2L2 10l8 8" stroke="#181818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+    html += '<span>我</span>';
+    html += '</div>';
+    html += '<div class="wechat-chat-header-title">收藏</div>';
+    html += '<div class="wechat-chat-header-actions">';
+    html += '<svg viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>';
+    html += '</div>';
+    html += '</div>';
+
+    // 列表
+    html += '<div class="wechat-favorites-body">';
+    if (!meProfile.favorites.length) {
+      html += '<div class="wechat-favorites-empty">暂无收藏</div>';
+    } else {
+      html += '<div class="wechat-favorites-list">';
+      meProfile.favorites.forEach(function (fav) {
+        var icon = FAV_ICONS[fav.type] || FAV_ICONS.text;
+        html += '<div class="wechat-fav-item">';
+        html += '<div class="wechat-fav-icon type-' + escapeHtmlText(fav.type) + '">' + icon + '</div>';
+        html += '<div class="wechat-fav-main">';
+        html += '<div class="wechat-fav-title">' + escapeHtmlText(fav.title) + '</div>';
+        html += '<div class="wechat-fav-meta"><span>' + escapeHtmlText(fav.source) + '</span><span>' + escapeHtmlText(fav.time) + '</span></div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
     html += '</div>';
 
     html += '</div>';
     return html;
+  }
+
+  function openFavoritesPage() {
+    var appContent = document.getElementById('appContent');
+    if (!appContent) return;
+    appContent.innerHTML = renderFavoritesPage();
+    var backBtn = appContent.querySelector('[data-action="back-from-favorites"]');
+    if (backBtn) {
+      backBtn.addEventListener('click', function () {
+        backToList();
+        // 回到「我」tab
+        setTimeout(function () {
+          var meTab = document.querySelector('.wechat-tab[data-tab="me"]');
+          if (meTab) meTab.click();
+        }, 0);
+      });
+    }
   }
 
   // ---------- 微信渲染 ----------
@@ -506,6 +547,15 @@
       var backBtn = e.target.closest('#wechatBackBtn');
       if (backBtn) {
         AppCore.goHome();
+      }
+
+      // 「我」页面里的行点击
+      var meRow = e.target.closest('[data-me-action]');
+      if (meRow) {
+        var act = meRow.getAttribute('data-me-action');
+        if (act === 'open-favorites') {
+          openFavoritesPage();
+        }
       }
     });
 

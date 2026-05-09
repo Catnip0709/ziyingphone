@@ -2444,6 +2444,50 @@ body {
 }
 
 /* ========================================
+   WeChat Favorites - 收藏夹页面
+   ======================================== */
+.wechat-favorites-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #EDEDED;
+}
+
+.wechat-favorites-header {
+  background: #EDEDED;
+  border-bottom: 0.5px solid #DCDCDC;
+}
+
+.wechat-favorites-header .wechat-chat-header-actions svg {
+  width: 22px;
+  height: 22px;
+}
+
+.wechat-favorites-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 0 calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+.wechat-favorites-list {
+  background: #fff;
+  padding: 0 18px;
+}
+
+.wechat-favorites-list .wechat-fav-item {
+  padding: 14px 0;
+}
+
+.wechat-favorites-empty {
+  margin-top: 80px;
+  text-align: center;
+  font-size: 14px;
+  color: #B2B2B2;
+}
+
+/* ========================================
    WeChat Chat - 微信聊天页面
    ======================================== */
 
