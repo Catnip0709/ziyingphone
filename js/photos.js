@@ -57,32 +57,82 @@
       if (!PHOTO_EXT_RE.test(fileName)) return;
       if (seen[fileName]) return;
       seen[fileName] = true;
-      photos.push({
-        fileName: fileName,
-        url: PHOTOS_DIR + encodeURIComponent(fileName),
-        title: getPhotoTitle(fileName),
-        capturedAt: null,
-        modifiedAt: null,
-        size: "",
-        loadedMeta: false
-      });
+      photos.push(buildPhoto(fileName));
     });
 
     return photos;
   }
 
-  function fetchPhotoList(callback) {
-    fetch(PHOTOS_LIST_PATH)
+  function buildPhoto(fileName) {
+    return {
+      fileName: fileName,
+      url: PHOTOS_DIR + encodeURIComponent(fileName),
+      title: getPhotoTitle(fileName),
+      capturedAt: null,
+      modifiedAt: null,
+      size: "",
+      loadedMeta: false
+    };
+  }
+
+  // 解析目录自动索引（python http.server / npx serve / nginx autoindex 等）
+  // 返回的 HTML 通常包含 <a href="filename.jpg">...</a>
+  function parseAutoIndex(html) {
+    var photos = [];
+    var seen = {};
+    var hrefRe = /<a\s+[^>]*href=["']([^"'?#]+)["']/gi;
+    var match;
+    while ((match = hrefRe.exec(String(html || ""))) !== null) {
+      var raw = match[1];
+      // 跳过父目录、绝对 URL、子目录
+      if (!raw || raw === "../" || raw === "./" || raw.indexOf("://") !== -1) continue;
+      // 取最后一段，去掉路径前缀
+      var fileName = raw.split("/").filter(Boolean).pop() || "";
+      try {
+        fileName = decodeURIComponent(fileName);
+      } catch (err) {
+        // 保持原样
+      }
+      if (!PHOTO_EXT_RE.test(fileName)) continue;
+      if (seen[fileName]) continue;
+      seen[fileName] = true;
+      photos.push(buildPhoto(fileName));
+    }
+    return photos;
+  }
+
+  function fetchAutoIndex() {
+    return fetch(PHOTOS_DIR, { headers: { Accept: "text/html" } })
       .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.text();
-      })
-      .then(function (text) {
-        callback(parsePhotoList(text));
+        if (!res.ok) return [];
+        var contentType = res.headers.get("Content-Type") || "";
+        if (contentType.indexOf("text/html") === -1) return [];
+        return res.text().then(parseAutoIndex);
       })
       .catch(function () {
-        callback([]);
+        return [];
       });
+  }
+
+  function fetchPhotoList(callback) {
+    fetchAutoIndex().then(function (autoPhotos) {
+      if (autoPhotos && autoPhotos.length) {
+        callback(autoPhotos);
+        return;
+      }
+      // 回退到 album.txt 清单
+      fetch(PHOTOS_LIST_PATH)
+        .then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.text();
+        })
+        .then(function (text) {
+          callback(parsePhotoList(text));
+        })
+        .catch(function () {
+          callback([]);
+        });
+    });
   }
 
   function loadPhotoHead(photo) {
@@ -239,13 +289,13 @@
     var html = '<div class="photos-app">';
     html += '<div class="photos-header">';
     html += "<h1>相册</h1>";
-    html += '<div class="photos-subtitle">按清单读取 picture/album 里的图片</div>';
+    html += '<div class="photos-subtitle">自动读取 picture/album 中的图片</div>';
     html += "</div>";
     html += '<div class="photos-grid">';
     if (!photos || !photos.length) {
       html += '<div class="photos-empty">';
       html += '<div class="photos-empty-title">相册里还没有图片</div>';
-      html += '<div class="photos-empty-text">把图片放进 `picture/album`，并把文件名写进 `text/photos/album.txt` 后刷新页面，这里就会显示。</div>';
+      html += '<div class="photos-empty-text">把图片放进 `picture/album` 后刷新即可。若服务器未开启目录索引，可在 `text/photos/album.txt` 里追加文件名作为兜底。</div>';
       html += "</div>";
     } else {
       photos.forEach(function (photo, index) {
@@ -329,7 +379,7 @@
   }
 
   function renderLoading() {
-    return '<div class="photos-app"><div class="photos-header"><h1>相册</h1><div class="photos-subtitle">正在读取 text/photos/album.txt...</div></div><div class="photos-grid"><div class="photos-empty"><div class="photos-empty-title">正在读取图片</div><div class="photos-empty-text">请稍候。</div></div></div><div class="photos-viewer-host"></div></div>';
+    return '<div class="photos-app"><div class="photos-header"><h1>相册</h1><div class="photos-subtitle">正在读取 picture/album...</div></div><div class="photos-grid"><div class="photos-empty"><div class="photos-empty-title">正在读取图片</div><div class="photos-empty-text">请稍候。</div></div></div><div class="photos-viewer-host"></div></div>';
   }
 
   function openPhotosApp(forceReload) {

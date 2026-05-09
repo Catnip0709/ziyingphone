@@ -3,3 +3,5 @@
 # 支持 jpg、jpeg、png、webp、gif
 
 ziying.jpg
+575d705b1f9148e381dbb63c1a8a4771.png
+20260509-143226.jpeg

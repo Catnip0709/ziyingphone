@@ -59,6 +59,18 @@
       }
     },
     {
+      name: "回春堂老周",
+      avatar: "🌿",
+      avatarColor: "#6B8E5A",
+      time: "5月20日",
+      pinned: false,
+      txtPath: "text/wechat/yaopu_wechat.txt",
+      characters: {
+        "紫英": { avatarName: "英", avatarColor: "#5B8DB8", isSelf: true },
+        "回春堂老周": { avatarName: "🌿", avatarColor: "#6B8E5A", isSelf: false }
+      }
+    },
+    {
       name: "天河",
       avatar: "河",
       avatarColor: "#4A90D9",
