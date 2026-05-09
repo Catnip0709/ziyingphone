@@ -2231,6 +2231,219 @@ body {
 }
 
 /* ========================================
+   WeChat Me - 我的页面
+   ======================================== */
+.wechat-me {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #EDEDED;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
+.wechat-me-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 18px;
+  background: #fff;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wechat-me-profile:active {
+  background: #F3F3F3;
+}
+
+.wechat-me-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.wechat-me-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wechat-me-name {
+  font-size: 19px;
+  font-weight: 600;
+  color: #181818;
+  line-height: 1.2;
+}
+
+.wechat-me-id {
+  font-size: 13px;
+  color: #888;
+}
+
+.wechat-me-region {
+  font-size: 12px;
+  color: #B2B2B2;
+}
+
+.wechat-me-qr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wechat-me-qr svg:first-child {
+  width: 22px;
+  height: 22px;
+}
+
+.wechat-me-section {
+  background: #fff;
+  margin-bottom: 12px;
+  border-radius: 0;
+}
+
+.wechat-me-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-top: 0.5px solid #ECECEC;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wechat-me-row.first {
+  border-top: none;
+}
+
+.wechat-me-row:active {
+  background: #F3F3F3;
+}
+
+.wechat-me-row-icon,
+.wechat-me-status-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wechat-me-row-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.wechat-me-status-icon {
+  font-size: 18px;
+}
+
+.wechat-me-row-label {
+  flex: 1;
+  font-size: 15px;
+  color: #181818;
+}
+
+.wechat-me-row-value {
+  font-size: 13px;
+  color: #888;
+  margin-right: 4px;
+}
+
+.wechat-me-row-arrow {
+  flex-shrink: 0;
+}
+
+/* 收藏夹 */
+.wechat-me-favorites {
+  background: #fff;
+  margin-bottom: 12px;
+  padding: 14px 18px 4px;
+}
+
+.wechat-me-favorites-title {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.wechat-me-favorites-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.wechat-fav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 0.5px solid #ECECEC;
+}
+
+.wechat-fav-item:first-child {
+  border-top: none;
+}
+
+.wechat-fav-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.wechat-fav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.wechat-fav-icon.type-image { background: #3CB371; }
+.wechat-fav-icon.type-voice { background: #E67E22; }
+.wechat-fav-icon.type-link  { background: #5B8DB8; }
+.wechat-fav-icon.type-file  { background: #7B7B7B; }
+.wechat-fav-icon.type-text  { background: #BDA877; }
+
+.wechat-fav-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wechat-fav-title {
+  font-size: 14px;
+  color: #181818;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.wechat-fav-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #B2B2B2;
+}
+
+/* ========================================
    WeChat Chat - 微信聊天页面
    ======================================== */
 
