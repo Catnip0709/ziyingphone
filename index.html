@@ -157,6 +157,26 @@
                 <span class="app-icon-label">微信</span>
               </div>
 
+              <!-- 鬼界微信 - 暗夜版微信 -->
+              <div class="app-icon" data-app="wechatblack">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <rect width="60" height="60" rx="13" fill="#0B3B2E"/>
+                    <!-- 大气泡 -->
+                    <path d="M22 10c-8.3 0-15 5.4-15 12c0 3.6 2 6.8 5 9l-2 5l6-3c1.9 0.6 4 1 6 1c8.3 0 15-5.4 15-12s-6.7-12-15-12z" fill="#DDEEE7"/>
+                    <!-- 小气泡 -->
+                    <path d="M42 30c-6.6 0-12 4.3-12 9.5c0 2.9 1.6 5.4 4 7.2l-1.5 4l4.8-2.4c1.5 0.4 3 0.7 4.7 0.7c6.6 0 12-4.3 12-9.5S48.6 30 42 30z" fill="#DDEEE7"/>
+                    <!-- 大气泡眼睛 -->
+                    <circle cx="16" cy="20" r="2.5" fill="#0B3B2E"/>
+                    <circle cx="28" cy="20" r="2.5" fill="#0B3B2E"/>
+                    <!-- 小气泡眼睛 -->
+                    <circle cx="37" cy="38" r="2" fill="#0B3B2E"/>
+                    <circle cx="47" cy="38" r="2" fill="#0B3B2E"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">鬼界微信</span>
+              </div>
+
               <!-- 微信读书 -->
               <div class="app-icon" data-app="wechatbook">
                 <div class="app-icon-img">
@@ -197,6 +217,27 @@
                   </svg>
                 </div>
                 <span class="app-icon-label">DeepSeek</span>
+              </div>
+
+              <!-- 时间线 -->
+              <div class="app-icon" data-app="timeline">
+                <div class="app-icon-img">
+                  <svg viewBox="0 0 60 60" width="100%" height="100%">
+                    <defs>
+                      <linearGradient id="timelineBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#26364F"/>
+                        <stop offset="100%" stop-color="#7C5C8A"/>
+                      </linearGradient>
+                    </defs>
+                    <rect width="60" height="60" rx="13" fill="url(#timelineBg)"/>
+                    <path d="M30 10v40" stroke="rgba(255,255,255,0.42)" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="30" cy="15" r="4.5" fill="#F6D365"/>
+                    <circle cx="30" cy="29" r="4.5" fill="#FFFFFF"/>
+                    <circle cx="30" cy="43" r="4.5" fill="#C8A2FF"/>
+                    <path d="M19 15h-5M41 29h5M19 43h-5" stroke="rgba(255,255,255,0.75)" stroke-width="2.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <span class="app-icon-label">时间线</span>
               </div>
             </div>
 
@@ -319,6 +360,7 @@
   <script src="js/phone.js"></script>
   <script src="js/messages.js"></script>
   <script src="js/photos.js"></script>
+  <script src="js/timeline.js"></script>
   <!-- 微信组件 -->
   <script src="js/wechat-components.js"></script>
   <!-- 朋友圈组件 -->
@@ -326,5 +368,7 @@
   <!-- 通用聊天文本加载器 -->
   <script src="js/chat-text-loader.js"></script>
   <!-- 微信应用 -->
-  <script src="js/wechat.js"></script></body>
+  <script src="js/wechat.js"></script>
+  <!-- 鬼界微信应用 -->
+  <script src="js/wechatblack.js"></script></body>
 </html>

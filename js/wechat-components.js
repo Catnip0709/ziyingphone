@@ -246,17 +246,19 @@ var WeChatComponents = (function() {
   }
 
   function renderChatPage(chatInfo, messages) {
-    var backHandler = 'window.WechatApp && WechatApp.backToList ? WechatApp.backToList() : AppCore.goHome()';
+    var backHandler = chatInfo.backHandler || 'window.WechatApp ? window.WechatApp.backToList() : AppCore.goHome()';
+    var pageClass = chatInfo.pageClass ? ' ' + escapeHtml(chatInfo.pageClass) : '';
+    var iconStroke = chatInfo.iconStroke || "#181818";
     messages = Array.isArray(messages) ? messages : [];
-    var html = '<div class="wechat-chat-page">';
+    var html = '<div class="wechat-chat-page' + pageClass + '">';
 
     html += '<div class="wechat-chat-header">';
     html += '<button class="wechat-chat-header-back" onclick="' + backHandler + '">';
-    html += '<svg viewBox="0 0 12 20" width="10" height="16"><path d="M10 18L2 10l8-8" stroke="#181818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+    html += '<svg viewBox="0 0 12 20" width="10" height="16"><path d="M10 18L2 10l8-8" stroke="' + iconStroke + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
     html += '</button>';
     html += '<div class="wechat-chat-header-title">' + escapeHtml(chatInfo.name) + '</div>';
     html += '<button class="wechat-chat-header-more">';
-    html += '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#181818" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>';
+    html += '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="' + iconStroke + '" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>';
     html += '</button>';
     html += '</div>';
 
@@ -285,6 +287,9 @@ var WeChatComponents = (function() {
           case 'miniapp': content = renderMiniappMessage(msg.title, msg.source, msg.text, msg.isSelf); break;
           case 'favorite': content = renderFavoriteMessage(msg.title, msg.source, msg.text, msg.isSelf); break;
           case 'groupcollect': content = renderGroupCollectMessage(msg.title, msg.amount, msg.status, msg.text, msg.isSelf); break;
+        }
+        if (msg.failed && msg.isSelf) {
+          content = '<div class="wechat-failed-wrap"><div class="wechat-message-failed" title="发送失败">!</div>' + content + '</div>';
         }
         var avatar = renderAvatar(msg.avatarName, msg.avatarColor);
         html += renderMessageRow(content, msg.isSelf, avatar, msg.senderName);

@@ -1,0 +1,41 @@
+# 鬼界朋友圈文案
+
+[cover]
+name=霜刃未改
+avatarName=紫
+avatarColor=#345E4A
+
+[post]
+name=鬼界微信使用说明
+avatarName=令
+avatarColor=#345E4A
+time=置顶
+text=鬼界账号需服役结束后激活。未激活账号无法读取人间消息，但每次通信仍会消耗人间使用者灵力与生命力。
+likes=壬癸,纸钱签收站
+
+[post]
+name=冥河摆渡
+avatarName=渡
+avatarColor=#254B42
+time=今日 06:06
+text=忘川东渡口今日水位上涨，摆渡延迟。请亡魂保管好号牌，勿在桥头逗留。
+images=1
+likes=纸钱签收站,壬癸
+
+[post]
+name=风雅颂
+avatarName=风
+avatarColor=#596477
+time=昨日 23:12
+text=新一期口述史征稿：那些留在人间的人，后来怎样了。
+remind=提到了 慕容紫英
+likes=云天青,韩北旷
+comment=云天青||你这题目怪会扎人。
+
+[post]
+name=慕容紫英
+avatarName=紫
+avatarColor=#5B8DB8
+time=仅自己可见
+text=若通信终有一日可达，第一句仍不该说思念。
+blocked=仅自己可见

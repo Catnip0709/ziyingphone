@@ -370,6 +370,153 @@ body {
 }
 
 /* ========================================
+   Timeline App - 时间线
+   ======================================== */
+.timeline-app {
+  min-height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(198, 162, 255, 0.2), transparent 28%),
+    linear-gradient(180deg, #151927 0%, #25212f 42%, #11131b 100%);
+  color: #F7F2EA;
+  padding: 28px 20px calc(34px + env(safe-area-inset-bottom, 0px));
+}
+
+.timeline-loading,
+.timeline-empty {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(247, 242, 234, 0.65);
+  font-size: 14px;
+}
+
+.timeline-hero {
+  padding: 12px 2px 24px;
+}
+
+.timeline-kicker {
+  display: inline-flex;
+  padding: 5px 10px;
+  border: 1px solid rgba(246, 211, 101, 0.38);
+  border-radius: 999px;
+  color: #F6D365;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.timeline-hero h1 {
+  margin: 14px 0 8px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.timeline-hero p {
+  margin: 0;
+  color: rgba(247, 242, 234, 0.72);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.timeline-list {
+  position: relative;
+  padding: 4px 0 0 18px;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 8px;
+  bottom: 26px;
+  width: 2px;
+  background: linear-gradient(180deg, #F6D365, rgba(255, 255, 255, 0.28), #C8A2FF);
+  border-radius: 999px;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  padding-bottom: 22px;
+}
+
+.timeline-node {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-node span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F6D365;
+  color: #221A12;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 0 0 5px rgba(246, 211, 101, 0.12);
+}
+
+.timeline-card {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.timeline-year {
+  color: #F6D365;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.timeline-card h2 {
+  margin: 0 0 9px;
+  font-size: 17px;
+  color: #FFFFFF;
+}
+
+.timeline-card p {
+  margin: 0;
+  color: rgba(247, 242, 234, 0.82);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.timeline-item.tone-illness .timeline-node span {
+  background: #B7D7C2;
+  box-shadow: 0 0 0 5px rgba(183, 215, 194, 0.12);
+}
+
+.timeline-item.tone-death .timeline-node span {
+  background: #D8D3CC;
+  color: #282828;
+  box-shadow: 0 0 0 5px rgba(216, 211, 204, 0.12);
+}
+
+.timeline-item.tone-ghost .timeline-node span {
+  background: #C8A2FF;
+  color: #1B1428;
+  box-shadow: 0 0 0 5px rgba(200, 162, 255, 0.12);
+}
+
+/* ========================================
    App Page - 应用详情页
    ======================================== */
 .page-app {
@@ -2488,6 +2635,280 @@ body {
 }
 
 /* ========================================
+   WeChat Black - 鬼界微信暗夜模式
+   ======================================== */
+.wechat-black-app {
+  background: #07110F;
+  color: #D7E7DF;
+}
+
+.wechat-black-app .wechat-header,
+.wechat-black-app .wechat-tabbar {
+  background: #0B1714;
+  border-color: rgba(102, 145, 127, 0.22);
+}
+
+.wechat-black-app .wechat-header-title,
+.wechat-black-app .wechat-chat-name,
+.wechat-black-app .wechat-me-name,
+.wechat-black-app .wechat-me-row-label,
+.wechat-black-app .wechat-fav-title {
+  color: #D7E7DF;
+}
+
+.wechat-black-app .wechat-list,
+.wechat-black-app .wechat-me {
+  background: #07110F;
+}
+
+.wechat-black-app .wechat-chat-item {
+  background: #0D1B18;
+  border-bottom-color: rgba(102, 145, 127, 0.16);
+}
+
+.wechat-black-app .wechat-chat-item.pinned {
+  background: #13241F;
+}
+
+.wechat-black-app .wechat-chat-item.inactive .wechat-chat-name::after {
+  content: "未激活";
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: rgba(240, 75, 75, 0.16);
+  color: #F06A6A;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.wechat-black-app .wechat-chat-msg,
+.wechat-black-app .wechat-chat-time,
+.wechat-black-app .wechat-me-id,
+.wechat-black-app .wechat-me-region,
+.wechat-black-app .wechat-me-row-value,
+.wechat-black-app .wechat-fav-meta,
+.wechat-black-app .moments-post-time {
+  color: #7D918B;
+}
+
+.wechat-black-app .wechat-tab {
+  color: #6F837D;
+}
+
+.wechat-black-app .wechat-tab.active {
+  color: #56B690;
+}
+
+.wechat-black-app .wechat-tab svg,
+.wechat-black-app .wechat-tab span {
+  color: #9BB3AB;
+}
+
+.wechat-black-app .wechat-tab.active svg,
+.wechat-black-app .wechat-tab.active span {
+  color: #56D69D;
+}
+
+.wechat-black-app .wechat-me-profile,
+.wechat-black-app .wechat-me-section,
+.wechat-black-app .wechat-black-favorites {
+  background: #0D1B18;
+}
+
+.wechat-black-app .wechat-me-row,
+.wechat-black-app .wechat-fav-item {
+  border-color: rgba(102, 145, 127, 0.16);
+}
+
+.wechat-black-app .wechat-page {
+  background: #07110F;
+}
+
+.wechat-black-app .wechat-moments {
+  background: #07110F;
+}
+
+.wechat-black-app .moments-cover {
+  background: linear-gradient(135deg, #102B25 0%, #06100E 100%);
+}
+
+.wechat-black-app .moments-feed,
+.wechat-black-app .moments-post {
+  background: #07110F;
+}
+
+.wechat-black-app .moments-post {
+  border-bottom-color: rgba(102, 145, 127, 0.16);
+}
+
+.wechat-black-app .moments-post-name,
+.wechat-black-app .moments-post-text,
+.wechat-black-app .moments-comment-text {
+  color: #D7E7DF;
+}
+
+.wechat-black-app .moments-social,
+.wechat-black-app .moments-post-remind,
+.wechat-black-app .moments-post-blocked {
+  background: #0D1B18;
+  color: #8EA69E;
+}
+
+.wechat-black-app .wechat-back-btn,
+.wechat-black-chat-page .wechat-chat-header-back,
+.wechat-black-chat-page .wechat-chat-header-more,
+.wechat-black-favorites-page .wechat-chat-back,
+.wechat-black-favorites-page .wechat-chat-header-actions {
+  background: transparent;
+  border: none;
+  color: #D7E7DF;
+}
+
+.wechat-black-app .wechat-back-btn svg,
+.wechat-black-chat-page .wechat-chat-header-back svg,
+.wechat-black-chat-page .wechat-chat-header-more svg,
+.wechat-black-favorites-page .wechat-chat-back svg,
+.wechat-black-favorites-page .wechat-chat-header-actions svg {
+  color: #D7E7DF;
+  stroke: #D7E7DF;
+}
+
+.wechat-black-app .wechat-pin-icon {
+  background: #0D1B18;
+}
+
+.wechat-black-app .wechat-chat-item.pinned .wechat-pin-icon {
+  background: #13241F;
+}
+
+.wechat-black-app .wechat-pin-icon::after {
+  border-left-color: #6D857D;
+  border-bottom-color: #6D857D;
+}
+
+.wechat-black-app .moments-actions-btn {
+  background: #14231F;
+}
+
+.wechat-black-app .moments-actions-btn svg {
+  color: #8EA69E;
+}
+
+.wechat-black-app .moments-actions-btn:active {
+  background: #1A2E28;
+}
+
+.wechat-black-app .wechat-moments {
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wechat-black-app .moments-cover {
+  position: relative;
+}
+
+.wechat-black-app .moments-feed {
+  overflow: visible;
+  min-height: auto;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+}
+
+.wechat-black-chat-page {
+  background: #07110F;
+}
+
+.wechat-black-chat-page .wechat-chat-header,
+.wechat-black-chat-page .wechat-input-area {
+  background: #0B1714;
+  border-color: rgba(102, 145, 127, 0.22);
+}
+
+.wechat-black-chat-page .wechat-chat-header-title {
+  color: #D7E7DF;
+}
+
+.wechat-black-chat-page .wechat-messages {
+  background: #07110F;
+}
+
+.wechat-black-chat-page .wechat-time-divider span,
+.wechat-black-chat-page .wechat-system-text {
+  background: rgba(255, 255, 255, 0.08);
+  color: #8EA69E;
+}
+
+.wechat-black-chat-page .wechat-bubble.other,
+.wechat-black-chat-page .wechat-bubble-card.other {
+  background: #162620;
+  color: #D7E7DF;
+}
+
+.wechat-black-chat-page .wechat-bubble.self,
+.wechat-black-chat-page .wechat-bubble-card.self {
+  background: #1E5E49;
+  color: #E9F5EF;
+}
+
+.wechat-black-chat-page .wechat-card-title,
+.wechat-black-chat-page .wechat-card-desc,
+.wechat-black-chat-page .wechat-card-type,
+.wechat-black-chat-page .wechat-card-source,
+.wechat-black-chat-page .wechat-location-name,
+.wechat-black-chat-page .wechat-location-address,
+.wechat-black-chat-page .wechat-quote-author,
+.wechat-black-chat-page .wechat-quote-text,
+.wechat-black-chat-page .wechat-quote-content {
+  color: inherit;
+}
+
+.wechat-black-chat-page .wechat-input-text {
+  background: #14231F;
+  color: #D7E7DF;
+}
+
+.wechat-black-chat-page .wechat-input-send {
+  background: #1E5E49;
+  color: #E9F5EF;
+}
+
+.wechat-black-chat-page .wechat-voice-text,
+.wechat-black-chat-page .wechat-message-row.self .wechat-voice-text {
+  color: rgba(215, 231, 223, 0.82);
+  border-top-color: rgba(215, 231, 223, 0.18);
+}
+
+.wechat-black-chat-page .wechat-voice-text-label {
+  color: rgba(215, 231, 223, 0.56);
+}
+
+.wechat-black-favorites-page {
+  background: #07110F;
+  color: #D7E7DF;
+}
+
+.wechat-black-favorites-page .wechat-favorites-header,
+.wechat-black-favorites-page .wechat-favorites-list {
+  background: #0D1B18;
+  border-color: rgba(102, 145, 127, 0.22);
+}
+
+.wechat-black-favorites-page .wechat-chat-back,
+.wechat-black-favorites-page .wechat-chat-header-title,
+.wechat-black-favorites-page .wechat-fav-title {
+  color: #D7E7DF;
+}
+
+.wechat-black-favorites-page .wechat-fav-item {
+  border-color: rgba(102, 145, 127, 0.16);
+}
+
+.wechat-black-favorites-page .wechat-fav-meta {
+  color: #7D918B;
+}
+
+/* ========================================
    WeChat Chat - 微信聊天页面
    ======================================== */
 
@@ -2663,6 +3084,28 @@ body {
   background: #95EC69;
   color: #000;
   border-top-right-radius: 2px;
+}
+
+.wechat-failed-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-direction: row-reverse;
+}
+
+.wechat-message-failed {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #F04B4B;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* ========== 各类型消息组件 ========== */
@@ -3632,4 +4075,92 @@ body {
   .side-btn { display: none; }
   .dynamic-island { top: 10px; }
   .dock { margin-bottom: 4px; }
+}
+
+/* 鬼界微信需要压过普通微信/朋友圈后续样式 */
+.wechat-black-chat-page .wechat-chat-header,
+.wechat-black-chat-page .wechat-input-area {
+  background: #0B1714;
+  border-color: rgba(102, 145, 127, 0.22);
+}
+
+.wechat-black-chat-page .wechat-chat-header-title,
+.wechat-black-chat-page .wechat-bubble.other,
+.wechat-black-chat-page .wechat-bubble.self,
+.wechat-black-chat-page .wechat-card-title,
+.wechat-black-chat-page .wechat-card-desc,
+.wechat-black-chat-page .wechat-card-type,
+.wechat-black-chat-page .wechat-card-source,
+.wechat-black-chat-page .wechat-location-name,
+.wechat-black-chat-page .wechat-location-address,
+.wechat-black-chat-page .wechat-quote-author,
+.wechat-black-chat-page .wechat-quote-text,
+.wechat-black-chat-page .wechat-quote-content,
+.wechat-black-chat-page .wechat-groupcollect-title,
+.wechat-black-chat-page .wechat-groupcollect-desc {
+  color: #D7E7DF;
+}
+
+.wechat-black-chat-page .wechat-messages {
+  background: #07110F;
+}
+
+.wechat-black-chat-page .wechat-bubble.other,
+.wechat-black-chat-page .wechat-bubble-card.other,
+.wechat-black-chat-page .wechat-system-card {
+  background: #162620;
+}
+
+.wechat-black-chat-page .wechat-bubble.self,
+.wechat-black-chat-page .wechat-bubble-card.self,
+.wechat-black-chat-page .wechat-bubble-groupcollect.self {
+  background: #1E5E49;
+}
+
+.wechat-black-chat-page .wechat-system-card-text,
+.wechat-black-chat-page .wechat-groupcollect-status {
+  color: #8EA69E;
+}
+
+.wechat-black-chat-page .wechat-input-text {
+  background: #14231F;
+  color: #D7E7DF;
+}
+
+.wechat-black-chat-page .wechat-input-send {
+  background: #1E5E49;
+  color: #E9F5EF;
+}
+
+.wechat-black-chat-page .wechat-input-btn svg {
+  color: #8EA69E;
+  stroke: #8EA69E;
+}
+
+.wechat-black-app .wechat-moments,
+.wechat-black-app .moments-feed,
+.wechat-black-app .moments-post {
+  background: #07110F;
+}
+
+.wechat-black-app .moments-cover {
+  background: linear-gradient(135deg, #102B25 0%, #06100E 100%);
+}
+
+.wechat-black-app .moments-post {
+  border-bottom-color: rgba(102, 145, 127, 0.16);
+}
+
+.wechat-black-app .moments-post-name,
+.wechat-black-app .moments-post-text,
+.wechat-black-app .moments-comment-item,
+.wechat-black-app .moments-comment-text {
+  color: #D7E7DF;
+}
+
+.wechat-black-app .moments-social,
+.wechat-black-app .moments-post-remind,
+.wechat-black-app .moments-post-blocked {
+  background: #0D1B18;
+  color: #8EA69E;
 }

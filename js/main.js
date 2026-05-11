@@ -19,9 +19,11 @@
   var APP_NAMES = {
     notes:        "备忘录",
     wechat:       "微信",
+    wechatblack:  "鬼界微信",
     wechatbook:   "微信读书",
     deepseek:     "DeepSeek",
     weibo:        "微博",
+    timeline:     "时间线",
     phone:        "电话",
     messages:     "短信",
     photos:       "相册"
@@ -132,7 +134,7 @@
 
         // 微信自带导航，隐藏通用导航栏
         var appNav = document.querySelector(".app-nav");
-        if (name === "wechat") {
+        if (name === "wechat" || name === "wechatblack") {
           appNav.style.display = "none";
         } else {
           appNav.style.display = "flex";
