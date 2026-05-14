@@ -30,7 +30,7 @@
   };
 
   // ---------- 埋点 ----------
-  var ANALYTICS_WEBHOOK_URL = "https://bytedance.sg.larkoffice.com/base/automation/webhook/event/BURZaFzXlwRUddh529tlykBxgOc";
+  var ANALYTICS_WEBHOOK_URL = "https://bytedance.larkoffice.com/base/automation/webhook/event/N83La1ejzwYWpuhYS76lgtxtgzf";
   var ANONYMOUS_USER_ID_KEY = "ziyingphone_anonymous_user_id";
 
   function createAnonymousUserId() {
