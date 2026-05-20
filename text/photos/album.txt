@@ -2,6 +2,15 @@
 # 每行一个文件名，对应 picture/album/ 下的图片
 # 支持 jpg、jpeg、png、webp、gif
 
-ziying.jpg
-575d705b1f9148e381dbb63c1a8a4771.png
-20260509-143226.jpeg
+01.png
+02.png
+03.png
+04.png
+05.png
+06.png
+07.jpeg
+08.png
+09.png
+10.png
+11.jpg
+12.png

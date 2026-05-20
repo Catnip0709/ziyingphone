@@ -11,6 +11,7 @@
   var PHOTO_EXT_RE = /\.(jpe?g|png|webp|gif)$/i;
   var cachedPhotos = null;
   var currentViewerState = null;
+  var currentViewerIndex = -1;
   var eventsBound = false;
 
   function escapeHtml(text) {
@@ -253,29 +254,35 @@
   }
 
   function renderPhotoCard(photo, index) {
-    var timeText = photo.capturedAt ? formatDate(photo.capturedAt) :
-      (photo.modifiedAt ? "修改于 " + formatDate(photo.modifiedAt) : "等待读取时间");
-
-    var html = '<button class="photos-card" type="button" data-photo-index="' + escapeHtml(String(index)) + '">';
-    html += '<div class="photos-thumb-wrap">';
+    var html = '<button class="photos-card" type="button" data-photo-index="' + escapeHtml(String(index)) + '" aria-label="' + escapeHtml(photo.title) + '">';
     html += '<img class="photos-thumb" src="' + escapeHtml(photo.url) + '" alt="' + escapeHtml(photo.title) + '" loading="lazy">';
-    html += "</div>";
-    html += '<div class="photos-card-info">';
-    html += '<div class="photos-card-title">' + escapeHtml(photo.title) + "</div>";
-    html += '<div class="photos-card-meta">' + escapeHtml(timeText) + "</div>";
-    html += "</div>";
     html += "</button>";
     return html;
   }
 
-  function renderViewer(photo) {
+  function renderViewer(photo, index, total) {
     var infoLabel = photo.capturedAt ? "拍摄时间 " + formatDate(photo.capturedAt) :
       (photo.modifiedAt ? "文件时间 " + formatDate(photo.modifiedAt) : "时间未知");
     var infoSize = photo.size ? " · " + photo.size : "";
+    var canPrev = index > 0;
+    var canNext = index < total - 1;
     var html = '<div class="photos-viewer" data-zoom="1">';
+    html += '<div class="photos-viewer-topbar">';
+    html += '<div class="photos-viewer-counter">' + (index + 1) + ' / ' + total + '</div>';
     html += '<button class="photos-viewer-close" type="button" aria-label="关闭">完成</button>';
+    html += '</div>';
     html += '<div class="photos-viewer-stage">';
     html += '<img class="photos-viewer-image" src="' + escapeHtml(photo.url) + '" alt="' + escapeHtml(photo.title) + '">';
+    if (canPrev) {
+      html += '<button class="photos-viewer-nav photos-viewer-nav-prev" type="button" aria-label="上一张">';
+      html += '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+      html += '</button>';
+    }
+    if (canNext) {
+      html += '<button class="photos-viewer-nav photos-viewer-nav-next" type="button" aria-label="下一张">';
+      html += '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+      html += '</button>';
+    }
     html += "</div>";
     html += '<div class="photos-viewer-info">';
     html += '<div class="photos-viewer-title">' + escapeHtml(photo.title) + "</div>";
@@ -341,12 +348,21 @@
     var photo = cachedPhotos && cachedPhotos[index];
 
     if (!host || !photo) return;
+    currentViewerIndex = index;
+    var total = cachedPhotos.length;
 
     loadPhotoExif(photo).finally(function () {
-      host.innerHTML = renderViewer(photo);
+      host.innerHTML = renderViewer(photo, index, total);
       resetViewerState();
       syncViewerTransform(host);
     });
+  }
+
+  function navigateViewer(delta) {
+    if (!cachedPhotos || currentViewerIndex < 0) return;
+    var next = currentViewerIndex + delta;
+    if (next < 0 || next >= cachedPhotos.length) return;
+    openViewer(next);
   }
 
   function closeViewer() {
@@ -356,6 +372,7 @@
       host.innerHTML = "";
     }
     currentViewerState = null;
+    currentViewerIndex = -1;
   }
 
   function refreshGrid() {
@@ -411,6 +428,20 @@
         return;
       }
 
+      var prevBtn = e.target.closest(".photos-viewer-nav-prev");
+      if (prevBtn && appContent.contains(prevBtn)) {
+        e.stopPropagation();
+        navigateViewer(-1);
+        return;
+      }
+
+      var nextBtn = e.target.closest(".photos-viewer-nav-next");
+      if (nextBtn && appContent.contains(nextBtn)) {
+        e.stopPropagation();
+        navigateViewer(1);
+        return;
+      }
+
       var closeBtn = e.target.closest(".photos-viewer-close");
       if (closeBtn && appContent.contains(closeBtn)) {
         closeViewer();
@@ -448,6 +479,9 @@
         currentViewerState.pinching = false;
         currentViewerState.startX = e.touches[0].clientX - currentViewerState.x;
         currentViewerState.startY = e.touches[0].clientY - currentViewerState.y;
+        currentViewerState.swipeStartX = e.touches[0].clientX;
+        currentViewerState.swipeStartY = e.touches[0].clientY;
+        currentViewerState.swipeDeltaX = 0;
       }
     }, { passive: true });
 
@@ -470,13 +504,24 @@
         currentViewerState.x = e.touches[0].clientX - currentViewerState.startX;
         currentViewerState.y = e.touches[0].clientY - currentViewerState.startY;
         syncViewerTransform(host);
+      } else if (e.touches.length === 1 && currentViewerState.scale === 1) {
+        currentViewerState.swipeDeltaX = e.touches[0].clientX - (currentViewerState.swipeStartX || 0);
       }
     }, { passive: true });
 
     document.addEventListener("touchend", function () {
       if (!currentViewerState) return;
+      // 触发 swipe 切换
+      if (currentViewerState.scale === 1 && Math.abs(currentViewerState.swipeDeltaX || 0) > 60) {
+        if (currentViewerState.swipeDeltaX < 0) {
+          navigateViewer(1);
+        } else {
+          navigateViewer(-1);
+        }
+      }
       currentViewerState.dragging = false;
       currentViewerState.pinching = false;
+      currentViewerState.swipeDeltaX = 0;
     });
   }
 

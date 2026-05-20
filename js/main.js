@@ -25,6 +25,7 @@
     weibo:        "微博",
     timeline:     "时间线",
     health:       "健康",
+    player:       "播放器",
     phone:        "电话",
     messages:     "短信",
     photos:       "相册"
