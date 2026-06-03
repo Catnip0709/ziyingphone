@@ -69,7 +69,13 @@
     var uiState = post.uiState || {};
     var html = '<div class="weibo-card" data-post-card="' + postIndex + '">';
     html += '<div class="weibo-post-header">';
-    html += '<div class="weibo-post-avatar" style="background:' + escapeHtml(post.avatarColor || "#5B8DB8") + '">' + escapeHtml(post.avatarName || "?") + "</div>";
+    var weiboPostStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(post.avatarName, post.avatarColor || "#5B8DB8", post.user)
+      : 'background:' + escapeHtml(post.avatarColor || "#5B8DB8");
+    var weiboPostInner = window.AvatarUtil
+      ? window.AvatarUtil.text(post.avatarName, post.user)
+      : escapeHtml(post.avatarName || "?");
+    html += '<div class="weibo-post-avatar" style="' + weiboPostStyle + '">' + escapeHtml(weiboPostInner) + "</div>";
     html += '<div class="weibo-post-user">';
     html += '<div class="weibo-post-name-row">';
     html += '<span class="weibo-post-name">' + escapeHtml(post.user) + "</span>";
@@ -134,7 +140,14 @@
   function renderProfileCard(profile) {
     var html = '<div class="weibo-profile-card">';
     html += '<div class="weibo-profile-top">';
-    html += '<div class="weibo-profile-avatar" style="background:' + escapeHtml(profile.avatarColor || "#5B8DB8") + '">' + escapeHtml(profile.avatarName || "英") + "</div>";
+    var weiboProfileName = profile.name || "慕容紫英";
+    var weiboProfileStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(profile.avatarName, profile.avatarColor || "#5B8DB8", weiboProfileName)
+      : 'background:' + escapeHtml(profile.avatarColor || "#5B8DB8");
+    var weiboProfileInner = window.AvatarUtil
+      ? window.AvatarUtil.text(profile.avatarName, weiboProfileName)
+      : escapeHtml(profile.avatarName || "英");
+    html += '<div class="weibo-profile-avatar" style="' + weiboProfileStyle + '">' + escapeHtml(weiboProfileInner) + "</div>";
     html += '<div class="weibo-profile-main">';
     html += '<div class="weibo-profile-name">' + escapeHtml(profile.name || "慕容紫英") + "</div>";
     html += '<div class="weibo-profile-handle">' + escapeHtml(profile.handle || "") + "</div>";

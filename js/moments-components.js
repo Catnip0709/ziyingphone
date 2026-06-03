@@ -126,7 +126,13 @@ var MomentsComponents = (function() {
   function renderPost(post) {
     var html = '<div class="moments-post">';
     html += '<div class="moments-post-header">';
-    html += '<div class="moments-post-avatar" style="background:' + post.avatarColor + '">' + escapeHtml(post.avatarName) + '</div>';
+    var postAvatarStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(post.avatarName, post.avatarColor, post.name)
+      : 'background:' + post.avatarColor;
+    var postAvatarInner = window.AvatarUtil
+      ? window.AvatarUtil.text(post.avatarName, post.name)
+      : escapeHtml(post.avatarName);
+    html += '<div class="moments-post-avatar" style="' + postAvatarStyle + '">' + escapeHtml(postAvatarInner) + '</div>';
     html += '<div class="moments-post-body">';
     html += '<div class="moments-post-meta">';
     html += '<span class="moments-post-name">' + escapeHtml(post.name) + '</span>';
@@ -157,7 +163,13 @@ var MomentsComponents = (function() {
     var html = '<div class="moments-cover">';
     html += '<div class="moments-cover-user">';
     html += '<span class="moments-cover-name">' + escapeHtml(userInfo.name) + '</span>';
-    html += '<div class="moments-cover-avatar" style="background:' + userInfo.avatarColor + '">' + escapeHtml(userInfo.avatarName) + '</div>';
+    var coverAvatarStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(userInfo.avatarName, userInfo.avatarColor, userInfo.name)
+      : 'background:' + userInfo.avatarColor;
+    var coverAvatarInner = window.AvatarUtil
+      ? window.AvatarUtil.text(userInfo.avatarName, userInfo.name)
+      : escapeHtml(userInfo.avatarName);
+    html += '<div class="moments-cover-avatar" style="' + coverAvatarStyle + '">' + escapeHtml(coverAvatarInner) + '</div>';
     html += '</div></div>';
     return html;
   }

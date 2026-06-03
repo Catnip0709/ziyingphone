@@ -52,7 +52,17 @@ var WeChatComponents = (function() {
 
   function renderAvatar(name, color, size) {
     size = size || 40;
-    return '<div class="wechat-msg-avatar" style="width:' + size + 'px;height:' + size + 'px;background:' + color + '">' + name + '</div>';
+    var util = (typeof window !== 'undefined' && window.AvatarUtil) || null;
+    var styleStr;
+    var inner;
+    if (util) {
+      styleStr = 'width:' + size + 'px;height:' + size + 'px;' + util.backgroundStyle(name, color, name);
+      inner = util.text(name, name);
+    } else {
+      styleStr = 'width:' + size + 'px;height:' + size + 'px;background:' + color;
+      inner = name;
+    }
+    return '<div class="wechat-msg-avatar" style="' + styleStr + '">' + inner + '</div>';
   }
 
   function renderTimeDivider(time) {

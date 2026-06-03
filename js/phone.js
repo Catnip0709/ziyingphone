@@ -91,7 +91,13 @@
   function renderPhoneRecord(record) {
     var meta = getTypeMeta(record.type);
     var html = '<div class="phone-record-item">';
-    html += '<div class="phone-record-avatar" style="background:' + escapeHtml(record.avatarColor) + '">' + escapeHtml(record.avatarName) + '</div>';
+    var phoneAvatarStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(record.avatarName, record.avatarColor, record.name)
+      : 'background:' + escapeHtml(record.avatarColor);
+    var phoneAvatarInner = window.AvatarUtil
+      ? window.AvatarUtil.text(record.avatarName, record.name)
+      : escapeHtml(record.avatarName);
+    html += '<div class="phone-record-avatar" style="' + phoneAvatarStyle + '">' + escapeHtml(phoneAvatarInner) + '</div>';
     html += '<div class="phone-record-main">';
     html += '<div class="phone-record-top">';
     html += '<div class="phone-record-name-row">';

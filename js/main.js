@@ -6,6 +6,60 @@
 (function () {
   "use strict";
 
+  // ---------- 头像工具 ----------
+  // 当 avatarName / name 命中已知人物（菱纱、紫英）时，渲染为对应图片头像；
+  // 否则保持原有"色块 + 文字"渲染逻辑，避免影响其它 NPC。
+  var AVATAR_IMAGE_MAP = {
+    "纱": "picture/lingsha.png",
+    "紫": "picture/ziying.png",
+    "英": "picture/ziying.png"
+  };
+  var AVATAR_NAME_MAP = [
+    { keys: ["菱纱", "韩菱纱"], src: "picture/lingsha.png" },
+    { keys: ["紫英", "慕容紫英"], src: "picture/ziying.png" }
+  ];
+
+  function resolveAvatarImage(avatarName, name) {
+    if (avatarName && AVATAR_IMAGE_MAP[avatarName]) {
+      return AVATAR_IMAGE_MAP[avatarName];
+    }
+    if (name) {
+      for (var i = 0; i < AVATAR_NAME_MAP.length; i++) {
+        var entry = AVATAR_NAME_MAP[i];
+        for (var j = 0; j < entry.keys.length; j++) {
+          if (name.indexOf(entry.keys[j]) !== -1) {
+            return entry.src;
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  // 返回 inline style 字符串（不带 style="" 包裹），用于头像 div
+  // 命中人物 => 使用图片背景；未命中 => 使用纯色背景，文字仍然显示
+  function avatarBackgroundStyle(avatarName, avatarColor, name) {
+    var src = resolveAvatarImage(avatarName, name);
+    if (src) {
+      return "background:#fff url('" + src + "') center/cover no-repeat";
+    }
+    return "background:" + (avatarColor || "#5B8DB8");
+  }
+
+  // 返回头像内显示的文字内容（未命中人物时的首字/标识），命中图片头像时返回空字符串
+  function avatarText(avatarName, name) {
+    if (resolveAvatarImage(avatarName, name)) {
+      return "";
+    }
+    return avatarName || "";
+  }
+
+  window.AvatarUtil = {
+    resolveImage: resolveAvatarImage,
+    backgroundStyle: avatarBackgroundStyle,
+    text: avatarText
+  };
+
   // ---------- DOM ----------
   var statusTime = document.getElementById("statusTime");
   var pageHome    = document.getElementById("pageHome");
@@ -136,10 +190,23 @@
 
         // 微信自带导航，隐藏通用导航栏
         var appNav = document.querySelector(".app-nav");
+        var phoneScreen = document.querySelector(".phone-screen");
         if (name === "wechat" || name === "wechatblack") {
           appNav.style.display = "none";
         } else {
           appNav.style.display = "flex";
+        }
+        // 浅色头部的应用需要深色状态栏文字与浅色导航栏
+        var LIGHT_APPS = {
+          wechat: 1, notes: 1, wechatbook: 1, messages: 1,
+          photos: 1, weibo: 1, phone: 1, health: 1
+        };
+        if (phoneScreen) {
+          if (LIGHT_APPS[name]) {
+            phoneScreen.classList.add("light-status");
+          } else {
+            phoneScreen.classList.remove("light-status");
+          }
         }
 
         // 绑定应用事件
@@ -172,6 +239,10 @@
       // 恢复导航栏
       var appNav = document.querySelector(".app-nav");
       appNav.style.display = "flex";
+
+      // 回到桌面恢复浅色状态栏文字（白色）
+      var phoneScreen = document.querySelector(".phone-screen");
+      if (phoneScreen) phoneScreen.classList.remove("light-status");
     }
   };
 

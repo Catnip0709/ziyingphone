@@ -305,7 +305,13 @@
 
     // 顶部资料卡
     html += '<div class="wechat-me-profile">';
-    html += '<div class="wechat-me-avatar" style="background:' + meProfile.avatarColor + '">' + escapeHtmlText(meProfile.avatarName) + '</div>';
+    var meAvatarStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(meProfile.avatarName, meProfile.avatarColor, meProfile.nickname)
+      : 'background:' + meProfile.avatarColor;
+    var meAvatarInner = window.AvatarUtil
+      ? window.AvatarUtil.text(meProfile.avatarName, meProfile.nickname)
+      : escapeHtmlText(meProfile.avatarName);
+    html += '<div class="wechat-me-avatar" style="' + meAvatarStyle + '">' + escapeHtmlText(meAvatarInner) + '</div>';
     html += '<div class="wechat-me-info">';
     html += '<div class="wechat-me-name">' + escapeHtmlText(meProfile.nickname) + '</div>';
     html += '<div class="wechat-me-id">微信号：' + escapeHtmlText(meProfile.wechatId) + '</div>';
@@ -423,6 +429,7 @@
     html += '</button>';
     html += '<div class="wechat-header-title" id="wechatHeaderTitle">微信</div>';
     html += '</div>';
+    html += '</div>';
     
     // 聊天列表页
     html += '<div class="wechat-page active" id="wechatPageChat">';
@@ -432,8 +439,14 @@
       var pinnedClass = chat.pinned ? ' pinned' : '';
       var groupClass = chat.isGroup ? ' group' : '';
       html += '<div class="wechat-chat-item' + pinnedClass + '" data-chat-index="' + index + '">';
-      html += '<div class="wechat-avatar' + groupClass + '" style="background:' + chat.avatarColor + '">';
-      html += chat.avatar;
+      var avatarStyle = window.AvatarUtil
+        ? window.AvatarUtil.backgroundStyle(chat.avatar, chat.avatarColor, chat.name)
+        : 'background:' + chat.avatarColor;
+      var avatarInner = window.AvatarUtil
+        ? window.AvatarUtil.text(chat.avatar, chat.name)
+        : chat.avatar;
+      html += '<div class="wechat-avatar' + groupClass + '" style="' + avatarStyle + '">';
+      html += avatarInner;
       if (chat.pinned) {
         html += '<div class="wechat-pin-icon"></div>';
       }

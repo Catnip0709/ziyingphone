@@ -212,7 +212,13 @@
     var cardIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="#6BB099" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>';
     var html = '<div class="wechat-me wechat-black-me">';
     html += '<div class="wechat-me-profile">';
-    html += '<div class="wechat-me-avatar" style="background:' + meProfile.avatarColor + '">' + escapeHtml(meProfile.avatarName) + '</div>';
+    var blackMeStyle = window.AvatarUtil
+      ? window.AvatarUtil.backgroundStyle(meProfile.avatarName, meProfile.avatarColor, meProfile.nickname)
+      : 'background:' + meProfile.avatarColor;
+    var blackMeInner = window.AvatarUtil
+      ? window.AvatarUtil.text(meProfile.avatarName, meProfile.nickname)
+      : escapeHtml(meProfile.avatarName);
+    html += '<div class="wechat-me-avatar" style="' + blackMeStyle + '">' + escapeHtml(blackMeInner) + '</div>';
     html += '<div class="wechat-me-info">';
     html += '<div class="wechat-me-name">' + escapeHtml(meProfile.nickname) + '</div>';
     html += '<div class="wechat-me-id">鬼界微信号：' + escapeHtml(meProfile.wechatId) + '</div>';
@@ -275,7 +281,13 @@
       var pinnedClass = chat.pinned ? ' pinned' : '';
       var inactiveClass = chat.inactive ? ' inactive' : '';
       html += '<div class="wechat-chat-item' + pinnedClass + inactiveClass + '" data-chat-index="' + index + '">';
-      html += '<div class="wechat-avatar" style="background:' + chat.avatarColor + '">' + escapeHtml(chat.avatar);
+      var blackAvatarStyle = window.AvatarUtil
+        ? window.AvatarUtil.backgroundStyle(chat.avatar, chat.avatarColor, chat.name)
+        : 'background:' + chat.avatarColor;
+      var blackAvatarInner = window.AvatarUtil
+        ? window.AvatarUtil.text(chat.avatar, chat.name)
+        : escapeHtml(chat.avatar);
+      html += '<div class="wechat-avatar" style="' + blackAvatarStyle + '">' + escapeHtml(blackAvatarInner);
       if (chat.pinned) html += '<div class="wechat-pin-icon"></div>';
       html += '</div><div class="wechat-chat-info"><div class="wechat-chat-top"><span class="wechat-chat-name">' + escapeHtml(chat.name) + '</span><span class="wechat-chat-time">' + escapeHtml(chat.time) + '</span></div>';
       html += '<div style="display:flex;align-items:center"><span class="wechat-chat-msg">' + escapeHtml(chat.msg) + '</span></div></div></div>';
